@@ -12,19 +12,53 @@ export default function Hero({ data }) {
   const [typedRole, rolesDone] = useTypewriter(profile.title, 52, 900)
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden bg-gradient-to-b from-gray-950 via-gray-900 to-gray-950">
+    <section className="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden bg-gray-950">
 
-      {/* ── Animated background ─────────────────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* ── Beach video background ───────────────────────────────── */}
+      <video
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+        style={{ opacity: 0.55 }}
+      >
+        <source
+          src="https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4"
+          type="video/mp4"
+        />
+      </video>
+
+      {/* ── Blue-tinted dark gradient overlay ───────────────────── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(3,10,30,0.72) 0%, rgba(7,20,55,0.65) 40%, rgba(3,10,30,0.80) 100%)',
+        }}
+      />
+
+      {/* ── Vignette overlay ────────────────────────────────────── */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,5,20,0.55) 100%)',
+        }}
+      />
+
+      {/* ── Subtle grid (behind content) ────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.25 }}>
         <div className="hero-grid absolute inset-0" />
-        {/* Glow orbs */}
+      </div>
+
+      {/* ── Cyan glow orbs ──────────────────────────────────────── */}
+      <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px]"
-          style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.07) 0%, transparent 70%)', animation: 'orbPulse 8s ease-in-out infinite' }}
+          style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.09) 0%, transparent 70%)', animation: 'orbPulse 8s ease-in-out infinite' }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px]"
-          style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.06) 0%, transparent 70%)', animation: 'orbPulse 10s ease-in-out infinite 3s' }}
+          style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)', animation: 'orbPulse 10s ease-in-out infinite 3s' }}
         />
       </div>
 
