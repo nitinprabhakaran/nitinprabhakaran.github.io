@@ -21,17 +21,17 @@ function JobCard({ job, index }) {
       }}
     >
       {/* Timeline dot */}
-      <div className="absolute left-0 md:left-8 top-5 w-3 h-3 rounded-full bg-cyan-500 -translate-x-1/2 ring-4 ring-gray-950">
+      <div className="absolute left-0 md:left-8 top-5 w-3 h-3 rounded-full bg-emerald-500 -translate-x-1/2 ring-4 ring-gray-950">
         {index === 0 && (
-          <span className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-75" />
+          <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-75" />
         )}
       </div>
 
       <div className="card-glow rounded-lg p-6 bg-gray-900/50 group">
         <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
           <div>
-            <h3 className="text-xl font-bold text-white group-hover:text-cyan-100 transition-colors">{job.role}</h3>
-            <div className="text-cyan-400 font-semibold mt-1">{job.company}</div>
+            <h3 className="text-xl font-bold text-white group-hover:text-emerald-100 transition-colors">{job.role}</h3>
+            <div className="text-emerald-400 font-semibold mt-1">{job.company}</div>
           </div>
           <div className="text-gray-500 text-sm font-mono bg-gray-900 px-3 py-1 rounded border border-gray-800">
             {formatDate(job.start)} – {formatDate(job.end)}
@@ -40,7 +40,7 @@ function JobCard({ job, index }) {
         <ul className="space-y-2 mt-4">
           {job.highlights.map((h, j) => (
             <li key={j} className="text-gray-400 text-sm flex gap-3">
-              <span className="text-cyan-500 mt-1 flex-shrink-0">▸</span>
+              <span className="text-emerald-500 mt-1 flex-shrink-0">▸</span>
               <span>{h}</span>
             </li>
           ))}
@@ -70,7 +70,7 @@ export default function Experience({ data }) {
 
         <div className="relative">
           {/* Vertical timeline line */}
-          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-500 via-blue-500 to-transparent opacity-30" />
+          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500 via-green-500 to-transparent opacity-30" />
           <div className="space-y-10">
             {data.experience.map((job, i) => (
               <JobCard key={i} job={job} index={i} />

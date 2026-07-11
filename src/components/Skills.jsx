@@ -24,7 +24,7 @@ function SkillCard({ category, items, index }) {
         transition: `opacity 0.6s ease ${index * 100}ms, transform 0.6s ease ${index * 100}ms`,
       }}
     >
-      <h3 className="text-cyan-400 font-semibold text-sm uppercase tracking-wider mb-4 font-mono">
+      <h3 className="text-emerald-400 font-semibold text-sm uppercase tracking-wider mb-4 font-mono">
         {CATEGORY_LABELS[category] || category}
       </h3>
       <div className="flex flex-wrap gap-2">

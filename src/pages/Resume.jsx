@@ -57,7 +57,7 @@ export default function Resume({ data }) {
         <span className="text-gray-600 text-sm font-mono">Nitin_Prabhakaran_Resume.pdf</span>
         <button
           onClick={handleDownload}
-          className="px-5 py-2 bg-cyan-600 text-white rounded text-sm font-semibold hover:bg-cyan-700 transition-colors"
+          className="px-5 py-2 bg-emerald-600 text-white rounded text-sm font-semibold hover:bg-emerald-700 transition-colors"
         >
           ↓ Download PDF
         </button>

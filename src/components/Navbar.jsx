@@ -49,7 +49,7 @@ export default function Navbar({ data }) {
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <Link
             to="/"
-            className="text-cyan-400 font-bold text-lg tracking-wider font-mono hover:text-cyan-300 transition-colors"
+            className="text-emerald-400 font-bold text-lg tracking-wider font-mono hover:text-emerald-300 transition-colors"
           >
             &gt; {data.profile.name.split(' ')[0].toLowerCase()}.sh
           </Link>
@@ -60,20 +60,20 @@ export default function Navbar({ data }) {
               <a
                 key={s}
                 href={`#${s}`}
-                className={`relative capitalize transition-colors hover:text-cyan-400 ${
-                  activeSection === s ? 'text-cyan-400' : ''
+                className={`relative capitalize transition-colors hover:text-emerald-400 ${
+                  activeSection === s ? 'text-emerald-400' : ''
                 }`}
               >
                 {s}
                 {activeSection === s && (
-                  <span className="absolute -bottom-1 left-0 w-full h-px bg-cyan-400 rounded" style={{ animation: 'fadeIn 0.3s ease' }} />
+                  <span className="absolute -bottom-1 left-0 w-full h-px bg-emerald-400 rounded" style={{ animation: 'fadeIn 0.3s ease' }} />
                 )}
               </a>
             ))}
             <Link
               to="/resume"
               target="_blank"
-              className="ml-4 px-4 py-1.5 bg-cyan-500/10 border border-cyan-500/50 text-cyan-400 rounded hover:bg-cyan-500/20 transition-all text-xs font-semibold tracking-wider"
+              className="ml-4 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 rounded hover:bg-emerald-500/20 transition-all text-xs font-semibold tracking-wider"
             >
               RESUME
             </Link>
@@ -81,7 +81,7 @@ export default function Navbar({ data }) {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden text-gray-400 hover:text-cyan-400 transition-colors"
+            className="md:hidden text-gray-400 hover:text-emerald-400 transition-colors"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -106,7 +106,7 @@ export default function Navbar({ data }) {
               <a
                 key={s}
                 href={`#${s}`}
-                className={`capitalize transition-colors hover:text-cyan-400 ${activeSection === s ? 'text-cyan-400' : ''}`}
+                className={`capitalize transition-colors hover:text-emerald-400 ${activeSection === s ? 'text-emerald-400' : ''}`}
                 onClick={() => setMenuOpen(false)}
               >
                 {s}
@@ -115,7 +115,7 @@ export default function Navbar({ data }) {
             <Link
               to="/resume"
               target="_blank"
-              className="text-cyan-400 font-semibold"
+              className="text-emerald-400 font-semibold"
               onClick={() => setMenuOpen(false)}
             >
               View Resume

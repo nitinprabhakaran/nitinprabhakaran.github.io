@@ -43,7 +43,7 @@ export default function Contact({ data }) {
               href={href}
               target={href.startsWith('http') ? '_blank' : undefined}
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="terminal-border rounded-lg p-4 hover:border-cyan-500/50 transition-all duration-300 group"
+              className="terminal-border rounded-lg p-4 hover:border-emerald-500/50 transition-all duration-300 group"
               style={{
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -51,7 +51,7 @@ export default function Contact({ data }) {
               }}
             >
               <div className="text-gray-500 text-xs uppercase tracking-wider mb-1">{label}</div>
-              <div className="text-cyan-400 text-sm group-hover:text-cyan-300 transition-colors font-mono truncate">{value}</div>
+              <div className="text-emerald-400 text-sm group-hover:text-emerald-300 transition-colors font-mono truncate">{value}</div>
             </a>
           ))}
         </div>
