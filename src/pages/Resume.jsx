@@ -1,4 +1,6 @@
 import { useRef } from 'react'
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 
 function formatDate(dateStr) {
   if (dateStr === 'present') return 'Present'
@@ -22,15 +24,28 @@ export default function Resume({ data }) {
   const resumeRef = useRef(null)
 
   const handleDownload = async () => {
-    const { default: html2pdf } = await import('html2pdf.js')
-    const opt = {
-      margin: 0,
-      filename: 'Nitin_Prabhakaran_Resume.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    }
-    html2pdf().set(opt).from(resumeRef.current).save()
+    if (!resumeRef.current) return
+
+    const canvas = await html2canvas(resumeRef.current, {
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      backgroundColor: '#ffffff',
+    })
+
+    const imgData = canvas.toDataURL('image/png')
+    const pdf = new jsPDF('p', 'mm', 'a4')
+    const pdfWidth = pdf.internal.pageSize.getWidth()
+    const pdfHeight = pdf.internal.pageSize.getHeight()
+
+    const imgWidth = canvas.width
+    const imgHeight = canvas.height
+    const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
+    const imgX = (pdfWidth - imgWidth * ratio) / 2
+    const imgY = 0
+
+    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio)
+    pdf.save('Nitin_Prabhakaran_Resume.pdf')
   }
 
   const { profile, contact, experience, skills, certifications } = data
