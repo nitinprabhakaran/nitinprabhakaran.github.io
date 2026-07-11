@@ -1,0 +1,202 @@
+{
+  "profile": {
+    "name": "Nitin Prabhakaran",
+    "title": "Senior Lead DevOps Engineer",
+    "summary": "DevOps leader with 10 years of experience building cloud platforms, automation, and AI-augmented workflows. Proven track record in platform engineering, infrastructure as code, CI/CD, and leading cross-functional teams.",
+    "location": "India"
+  },
+  "contact": {
+    "email": "nitin3011.np@gmail.com",
+    "phone": "+91 9821477277",
+    "linkedin": "https://linkedin.com/in/nitinprabhakaran3011",
+    "github": "https://github.com/nitinprabhakaran",
+    "twitter": "https://twitter.com/NITINPBK3011"
+  },
+  "experience": [
+    {
+      "company": "Envestnet",
+      "role": "Senior Lead DevOps Engineer",
+      "start": "2025-02",
+      "end": "present",
+      "highlights": [
+        "Driving AI adoption within the DevOps function; building internal agents to streamline CI/CD, infrastructure analysis, and self-service support workflows.",
+        "Introduced a front-end DevOps support agent integrated with a knowledge-base agent to enrich tickets, surface known solutions, and accelerate issue resolution.",
+        "Mentoring junior engineers on cross-team solution design, architecture, and end-to-end automation delivery.",
+        "Standardizing platform workflows through shared Helm charts, reusable Terraform modules, and DRY-based practices across microservices.",
+        "Applying scaling and cost-optimization strategies to reduce non-production cloud spend."
+      ]
+    },
+    {
+      "company": "Ameriprise Financial",
+      "role": "Lead Engineer – Cloud and DevOps",
+      "start": "2021-10",
+      "end": "2025-02",
+      "highlights": [
+        "Developed Ansible-based automation to reduce repetitive operations and improve efficiency for the CIS team.",
+        "Partnered with cloud and infrastructure teams to automate cross-functional processes, reporting, and routine maintenance cycles.",
+        "Built automation, playbooks, and scripts to support on-premises-to-AWS migration initiatives.",
+        "Created automation frameworks for disaster recovery setup and operational readiness."
+      ]
+    },
+    {
+      "company": "Rakuten",
+      "role": "Systems Engineer (DevOps and Automation)",
+      "start": "2021-01",
+      "end": "2021-10",
+      "highlights": [
+        "Delivered CI/CD operations and SaaS application deployments for client engagements.",
+        "Supported cloud migration initiatives from public cloud to Rakuten OneCloud."
+      ]
+    },
+    {
+      "company": "Ericsson",
+      "role": "Implementation Engineer",
+      "start": "2017-03",
+      "end": "2021-01",
+      "highlights": [
+        "Started as a Support Engineer performing maintenance operations for charging system servers.",
+        "Later moved into a DevOps Engineer role, driving CI/CD for charging system applications to Azure Cloud."
+      ]
+    }
+  ],
+  "skills": {
+    "cloud": [
+      "AWS",
+      "Azure"
+    ],
+    "iac": [
+      "Terraform",
+      "CloudFormation",
+      "Azure ARM Templates",
+      "OpenTofu"
+    ],
+    "cicd": [
+      "Jenkins",
+      "GitLab CI",
+      "ArgoCD",
+      "Argo Workflows"
+    ],
+    "containers": [
+      "Docker",
+      "Kubernetes",
+      "Helm",
+      "Kustomize"
+    ],
+    "observability": [
+      "New Relic",
+      "Sumo Logic"
+    ],
+    "scripting": [
+      "Python",
+      "Bash",
+      "Groovy"
+    ],
+    "coding_harness": [
+      "GitHub Copilot",
+      "Claude Code"
+    ],
+    "ai_automation": [
+      "AWS Bedrock Agents",
+      "Agno",
+      "LangChain",
+      "LangGraph"
+    ]
+  },
+  "certifications": [
+    {
+      "name": "RedHat Certified System Administrator (RHEL8)",
+      "file": "files/Red_Hat_Certificate_RHCSA-rhel_Nitin_Prabhakaran.pdf"
+    },
+    {
+      "name": "RedHat Certified System Engineer in Ansible 2.8 (RHEL8)",
+      "file": "files/Red_Hat_Certificate_RHCE-rhel_Nitin_Prabhakaran.pdf"
+    },
+    {
+      "name": "Certified Kubernetes Administrator (CKA)",
+      "file": "files/nitin-prabhakaran-certified-kubernetes-administrator-cka-certificate.pdf"
+    },
+    {
+      "name": "Microsoft Certified Azure Administrator Associate (AZ-104)",
+      "file": "files/Microsoft_Certified_Professional_Certificate_0.pdf"
+    },
+    {
+      "name": "Certified Gremlin Chaos Engineering Practitioner",
+      "file": "files/Gremlin Certified Chaos Engineer.pdf"
+    },
+    {
+      "name": "ITIL v4 Foundation in IT Service Management",
+      "file": "files/ITIL_v4_Foundation_in_IT_Service_Management.pdf"
+    },
+    {
+      "name": "Istio Essentials (Solo.io)",
+      "url": "https://www.credly.com/badges/faf2fd92-9ed0-408b-b462-c9df29efb626"
+    }
+  ],
+  "projects": [
+    {
+      "name": "DevOps AI Agents Platform",
+      "description": "Building an internal agent ecosystem to accelerate DevOps decisions across CI/CD, infrastructure analysis, and support.",
+      "tags": [
+        "AI Agents",
+        "AWS Bedrock",
+        "LangChain",
+        "LangGraph",
+        "Agno",
+        "Python"
+      ]
+    },
+    {
+      "name": "Internal Developer Platform (IDP)",
+      "description": "A unified platform backbone removing repeated infrastructure work across microservices teams through standards and self-service.",
+      "tags": [
+        "IDP",
+        "Helm",
+        "Terraform",
+        "Kustomize",
+        "ArgoCD",
+        "GitOps"
+      ]
+    },
+    {
+      "name": "Cloud Migration & DR Automation",
+      "description": "Automated the heavy lifting behind large-scale infrastructure migration and disaster recovery readiness on AWS.",
+      "tags": [
+        "AWS",
+        "Ansible",
+        "Python",
+        "Terraform",
+        "Migration"
+      ]
+    },
+    {
+      "name": "FinOps & Cost Optimization",
+      "description": "Scaling and scheduling strategies that reduced non-production cloud spend while maintaining developer velocity.",
+      "tags": [
+        "AWS Cost Optimization",
+        "FinOps",
+        "Kubernetes Autoscaling"
+      ]
+    },
+    {
+      "name": "Standardized CI/CD & GitOps Delivery",
+      "description": "Pipeline patterns and GitOps delivery that bring consistency, security scanning, and speed across teams.",
+      "tags": [
+        "Jenkins",
+        "GitLab CI",
+        "Argo Workflows",
+        "GitOps",
+        "Security Scanning"
+      ]
+    },
+    {
+      "name": "Automation & Scripting Library",
+      "description": "Curated Python and Bash utilities and patterns born from real operational challenges.",
+      "tags": [
+        "Python",
+        "Bash",
+        "Automation"
+      ],
+      "github": "https://github.com/nitinprabhakaran/Python_Scripts_and_Automations"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-gray-950 text-gray-100 font-mono;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent;
+  }
+  .card-glow {
+    @apply border border-cyan-900/50 hover:border-cyan-500/50 transition-all duration-300;
+  }
+  .terminal-border {
+    @apply border border-gray-700 bg-gray-900/50;
+  }
+}

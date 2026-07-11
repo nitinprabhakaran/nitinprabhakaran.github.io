@@ -1,0 +1,26 @@
+{
+  "name": "nitinprabhakaran-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "npm run yaml-to-json && npm run copy-assets && vite",
+    "build": "node scripts/yaml-to-json.js && node scripts/copy-assets.js && vite build",
+    "preview": "vite preview",
+    "yaml-to-json": "node scripts/yaml-to-json.js",
+    "copy-assets": "node scripts/copy-assets.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "html2pdf.js": "^0.14.0",
+    "js-yaml": "^5.2.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1",
+    "vite": "^8.1.4"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  }
+}
