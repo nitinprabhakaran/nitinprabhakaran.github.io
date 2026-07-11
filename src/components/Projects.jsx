@@ -15,19 +15,19 @@ function ProjectCard({ project, index }) {
     >
       {/* Card header accent */}
       <div className="flex items-center gap-2 mb-3">
-        <div className="w-2 h-2 rounded-full bg-cyan-500" />
-        <div className="w-2 h-2 rounded-full bg-blue-500" />
+        <div className="w-2 h-2 rounded-full bg-emerald-500" />
+        <div className="w-2 h-2 rounded-full bg-green-500" />
         <div className="w-2 h-2 rounded-full bg-gray-600" />
       </div>
 
-      <h3 className="text-white font-bold text-lg mb-3 group-hover:text-cyan-100 transition-colors">{project.name}</h3>
+      <h3 className="text-white font-bold text-lg mb-3 group-hover:text-emerald-100 transition-colors">{project.name}</h3>
       <p className="text-gray-400 text-sm leading-relaxed flex-1">{project.description}</p>
 
       <div className="flex flex-wrap gap-2 mt-4">
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="px-2 py-1 text-xs bg-blue-500/10 text-blue-400 rounded border border-blue-500/20 hover:border-blue-400/40 hover:bg-blue-500/15 transition-all"
+            className="px-2 py-1 text-xs bg-green-500/10 text-green-400 rounded border border-green-500/20 hover:border-green-400/40 hover:bg-green-500/15 transition-all"
           >
             {tag}
           </span>
@@ -39,7 +39,7 @@ function ProjectCard({ project, index }) {
           href={project.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-4 inline-flex items-center gap-1 text-cyan-400 text-xs hover:text-cyan-300 transition-colors font-mono group/link"
+          className="mt-4 inline-flex items-center gap-1 text-emerald-400 text-xs hover:text-emerald-300 transition-colors font-mono group/link"
         >
           <span className="group-hover/link:translate-x-1 transition-transform">→</span>
           <span>View on GitHub</span>

@@ -7,14 +7,14 @@ function AnimatedStat({ value, label, delay }) {
   return (
     <div
       ref={ref}
-      className="text-center p-4 bg-gray-900 rounded border border-gray-800 hover:border-cyan-500/30 transition-all duration-300"
+      className="text-center p-4 bg-gray-900 rounded border border-gray-800 hover:border-emerald-500/30 transition-all duration-300"
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
         transition: `opacity 0.6s ease ${delay}ms, transform 0.6s ease ${delay}ms`,
       }}
     >
-      <div className="text-cyan-400 font-bold text-lg">{value}</div>
+      <div className="text-emerald-400 font-bold text-lg">{value}</div>
       <div className="text-gray-500 text-xs mt-1 uppercase tracking-wider">{label}</div>
     </div>
   )
