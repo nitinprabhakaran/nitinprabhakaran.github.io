@@ -26,26 +26,35 @@ export default function Resume({ data }) {
   const handleDownload = async () => {
     if (!resumeRef.current) return
 
-    const canvas = await html2canvas(resumeRef.current, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff',
+    const pdf = new jsPDF('p', 'pt', 'a4')
+    await pdf.html(resumeRef.current, {
+      callback: (doc) => doc.save('Nitin_Prabhakaran_Resume.pdf'),
+      margin: [0, 0, 0, 0],
+      autoPaging: 'text',
+      x: 0,
+      y: 0,
+      width: 499,
+      windowWidth: 794,
+      html2canvas: {
+        scale: 1.5,
+        useCORS: true,
+        backgroundColor: '#ffffff',
+        onclone: (clonedDoc) => {
+          const el = clonedDoc.querySelector('.resume-content')
+          if (el) {
+            el.style.padding = '30px 36px'
+            el.style.width = '499pt'
+            el.style.maxWidth = '499pt'
+            el.style.boxSizing = 'border-box'
+            el.style.fontSize = '10px'
+            const links = el.querySelectorAll('a')
+            links.forEach((a) => {
+              a.textContent = a.textContent.replace('https://', '')
+            })
+          }
+        },
+      },
     })
-
-    const imgData = canvas.toDataURL('image/png')
-    const pdf = new jsPDF('p', 'mm', 'a4')
-    const pdfWidth = pdf.internal.pageSize.getWidth()
-    const pdfHeight = pdf.internal.pageSize.getHeight()
-
-    const imgWidth = canvas.width
-    const imgHeight = canvas.height
-    const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
-    const imgX = (pdfWidth - imgWidth * ratio) / 2
-    const imgY = 0
-
-    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio)
-    pdf.save('Nitin_Prabhakaran_Resume.pdf')
   }
 
   const { profile, contact, experience, skills, certifications } = data
@@ -66,31 +75,40 @@ export default function Resume({ data }) {
       {/* Resume content */}
       <div
         ref={resumeRef}
-        className="resume-content max-w-[210mm] mx-auto bg-white px-12 py-10 text-sm leading-relaxed"
+        className="resume-content max-w-[210mm] mx-auto bg-white text-sm leading-relaxed"
         style={{
           fontFamily: 'Arial, sans-serif',
           minHeight: '297mm',
           color: '#111827',
           backgroundColor: '#ffffff',
+          width: '210mm',
+          padding: '40px 48px',
+          boxSizing: 'border-box',
         }}
       >
         {/* Header */}
         <div className="border-b-2 pb-4 mb-6" style={{ borderColor: '#1f2937' }}>
           <h1 className="text-3xl font-bold" style={{ color: '#111827' }}>{profile.name}</h1>
           <div className="text-lg mt-1" style={{ color: '#4b5563' }}>{profile.title}</div>
-          <div className="flex flex-wrap gap-4 mt-3 text-xs" style={{ color: '#6b7280' }}>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs" style={{ color: '#6b7280' }}>
             <span>{contact.email}</span>
             <span>{contact.phone}</span>
-            <span>{contact.linkedin}</span>
-            <span>{contact.github}</span>
             <span>{profile.location}</span>
+          </div>
+          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-xs" style={{ color: '#6b7280' }}>
+            <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="ats-link">
+              linkedin.com/in/nitinprabhakaran3011
+            </a>
+            <a href={contact.github} target="_blank" rel="noopener noreferrer" className="ats-link">
+              github.com/nitinprabhakaran
+            </a>
           </div>
         </div>
 
         {/* Summary */}
         <div className="mb-5">
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-2" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Professional Summary</h2>
-          <p className="text-xs leading-relaxed" style={{ color: '#374151' }}>{profile.summary}</p>
+          <p className="text-xs leading-relaxed" style={{ color: '#4b5563' }}>{profile.summary}</p>
         </div>
 
         {/* Experience */}
@@ -109,8 +127,8 @@ export default function Resume({ data }) {
               </div>
               <ul className="mt-2 space-y-1">
                 {job.highlights.map((h, j) => (
-                  <li key={j} className="text-xs flex gap-2" style={{ color: '#374151' }}>
-                    <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>•</span>
+                  <li key={j} className="text-xs flex gap-2" style={{ color: '#4b5563' }}>
+                    <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>-</span>
                     <span>{h}</span>
                   </li>
                 ))}
@@ -122,9 +140,9 @@ export default function Resume({ data }) {
         {/* Skills */}
         <div className="mb-5">
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Technical Skills</h2>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-1">
             {Object.entries(skills).map(([cat, items]) => (
-              <div key={cat} className="text-xs">
+              <div key={cat} className="text-xs" style={{ color: '#374151' }}>
                 <span className="font-semibold" style={{ color: '#374151' }}>{CATEGORY_LABELS[cat] || cat}:</span>{' '}
                 <span style={{ color: '#4b5563' }}>{items.join(', ')}</span>
               </div>
@@ -135,11 +153,11 @@ export default function Resume({ data }) {
         {/* Certifications */}
         <div>
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Certifications</h2>
-          <ul className="grid grid-cols-2 gap-1">
+          <ul className="grid grid-cols-2 gap-x-4 gap-y-1">
             {certifications.map((cert, i) => (
               <li key={i} className="text-xs flex gap-2" style={{ color: '#374151' }}>
-                <span style={{ color: '#9ca3af' }}>✓</span>
-                <span>{cert.name}</span>
+                <span style={{ color: '#9ca3af' }}>-</span>
+                <span style={{ color: '#4b5563' }}>{cert.name}</span>
               </li>
             ))}
           </ul>
@@ -149,6 +167,16 @@ export default function Resume({ data }) {
       <style>{`
         .resume-content, .resume-content * {
           color-scheme: light !important;
+        }
+        .ats-link {
+          color: #6b7280;
+          text-decoration: none;
+        }
+        .resume-content p,
+        .resume-content li,
+        .resume-content div {
+          page-break-inside: avoid;
+          break-inside: avoid;
         }
         @media print {
           .no-print { display: none !important; }
