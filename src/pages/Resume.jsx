@@ -66,14 +66,19 @@ export default function Resume({ data }) {
       {/* Resume content */}
       <div
         ref={resumeRef}
-        className="max-w-[210mm] mx-auto bg-white text-gray-900 px-12 py-10 text-sm leading-relaxed"
-        style={{ fontFamily: 'Arial, sans-serif', minHeight: '297mm' }}
+        className="resume-content max-w-[210mm] mx-auto bg-white px-12 py-10 text-sm leading-relaxed"
+        style={{
+          fontFamily: 'Arial, sans-serif',
+          minHeight: '297mm',
+          color: '#111827',
+          backgroundColor: '#ffffff',
+        }}
       >
         {/* Header */}
-        <div className="border-b-2 border-gray-800 pb-4 mb-6">
-          <h1 className="text-3xl font-bold text-gray-900">{profile.name}</h1>
-          <div className="text-lg text-gray-600 mt-1">{profile.title}</div>
-          <div className="flex flex-wrap gap-4 mt-3 text-xs text-gray-500">
+        <div className="border-b-2 pb-4 mb-6" style={{ borderColor: '#1f2937' }}>
+          <h1 className="text-3xl font-bold" style={{ color: '#111827' }}>{profile.name}</h1>
+          <div className="text-lg mt-1" style={{ color: '#4b5563' }}>{profile.title}</div>
+          <div className="flex flex-wrap gap-4 mt-3 text-xs" style={{ color: '#6b7280' }}>
             <span>{contact.email}</span>
             <span>{contact.phone}</span>
             <span>{contact.linkedin}</span>
@@ -84,28 +89,28 @@ export default function Resume({ data }) {
 
         {/* Summary */}
         <div className="mb-5">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 border-b border-gray-300 pb-1 mb-2">Professional Summary</h2>
-          <p className="text-gray-700 text-xs leading-relaxed">{profile.summary}</p>
+          <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-2" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Professional Summary</h2>
+          <p className="text-xs leading-relaxed" style={{ color: '#374151' }}>{profile.summary}</p>
         </div>
 
         {/* Experience */}
         <div className="mb-5">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 border-b border-gray-300 pb-1 mb-3">Experience</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Experience</h2>
           {experience.map((job, i) => (
             <div key={i} className="mb-4">
               <div className="flex justify-between items-start">
                 <div>
-                  <div className="font-bold text-gray-900 text-sm">{job.role}</div>
-                  <div className="text-gray-600 text-xs">{job.company}</div>
+                  <div className="font-bold text-sm" style={{ color: '#111827' }}>{job.role}</div>
+                  <div className="text-xs" style={{ color: '#4b5563' }}>{job.company}</div>
                 </div>
-                <div className="text-gray-500 text-xs font-mono whitespace-nowrap">
+                <div className="text-xs font-mono whitespace-nowrap" style={{ color: '#6b7280' }}>
                   {formatDate(job.start)} – {formatDate(job.end)}
                 </div>
               </div>
               <ul className="mt-2 space-y-1">
                 {job.highlights.map((h, j) => (
-                  <li key={j} className="text-gray-700 text-xs flex gap-2">
-                    <span className="text-gray-400 flex-shrink-0">•</span>
+                  <li key={j} className="text-xs flex gap-2" style={{ color: '#374151' }}>
+                    <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>•</span>
                     <span>{h}</span>
                   </li>
                 ))}
@@ -116,12 +121,12 @@ export default function Resume({ data }) {
 
         {/* Skills */}
         <div className="mb-5">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 border-b border-gray-300 pb-1 mb-3">Technical Skills</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Technical Skills</h2>
           <div className="grid grid-cols-2 gap-2">
             {Object.entries(skills).map(([cat, items]) => (
               <div key={cat} className="text-xs">
-                <span className="font-semibold text-gray-700">{CATEGORY_LABELS[cat] || cat}:</span>{' '}
-                <span className="text-gray-600">{items.join(', ')}</span>
+                <span className="font-semibold" style={{ color: '#374151' }}>{CATEGORY_LABELS[cat] || cat}:</span>{' '}
+                <span style={{ color: '#4b5563' }}>{items.join(', ')}</span>
               </div>
             ))}
           </div>
@@ -129,11 +134,11 @@ export default function Resume({ data }) {
 
         {/* Certifications */}
         <div>
-          <h2 className="text-sm font-bold uppercase tracking-wider text-gray-800 border-b border-gray-300 pb-1 mb-3">Certifications</h2>
+          <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Certifications</h2>
           <ul className="grid grid-cols-2 gap-1">
             {certifications.map((cert, i) => (
-              <li key={i} className="text-xs text-gray-700 flex gap-2">
-                <span className="text-gray-400">✓</span>
+              <li key={i} className="text-xs flex gap-2" style={{ color: '#374151' }}>
+                <span style={{ color: '#9ca3af' }}>✓</span>
                 <span>{cert.name}</span>
               </li>
             ))}
@@ -142,6 +147,9 @@ export default function Resume({ data }) {
       </div>
 
       <style>{`
+        .resume-content, .resume-content * {
+          color-scheme: light !important;
+        }
         @media print {
           .no-print { display: none !important; }
           body { background: white; }
