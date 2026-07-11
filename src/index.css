@@ -4,16 +4,170 @@
   body {
     @apply bg-gray-950 text-gray-100 font-mono;
   }
+
+  html {
+    scroll-behavior: smooth;
+  }
 }
+
+/* ─── Keyframe animations ─────────────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes orbPulse {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50%       { opacity: 0.6;  transform: scale(1.1); }
+}
+
+@keyframes gridPan {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+@keyframes progressGrow {
+  from { width: 0%; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Utility classes ─────────────────────────────────────────────── */
 
 @layer utilities {
   .text-gradient {
     @apply bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent;
   }
+
   .card-glow {
-    @apply border border-cyan-900/50 hover:border-cyan-500/50 transition-all duration-300;
+    @apply border border-cyan-900/50 transition-all duration-300;
   }
+
+  .card-glow:hover {
+    border-color: rgba(34,211,238,0.5);
+    box-shadow: 0 0 24px rgba(34,211,238,0.08), 0 4px 24px rgba(0,0,0,0.4);
+    transform: translateY(-3px);
+  }
+
   .terminal-border {
     @apply border border-gray-700 bg-gray-900/50;
+  }
+
+  /* Moving grid background for Hero */
+  .hero-grid {
+    background-image:
+      linear-gradient(rgba(34,211,238,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(34,211,238,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridPan 18s linear infinite;
+  }
+
+  /* Blinking cursor appended via pseudo-element */
+  .cursor-blink::after {
+    content: '▋';
+    animation: blink 1s step-end infinite;
+    color: #22d3ee;
+    margin-left: 2px;
+  }
+
+  /* Scroll-progress bar */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #22d3ee, #3b82f6, #22d3ee);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+    z-index: 200;
+    transition: width 0.15s linear;
+  }
+
+  /* Skill tag */
+  .skill-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.75rem;
+    background-color: rgb(31 41 55); /* gray-800 */
+    color: rgb(209 213 219);         /* gray-300 */
+    border-radius: 9999px;
+    border: 1px solid rgb(55 65 81); /* gray-700 */
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    border-color: rgba(34,211,238,0.5);
+    color: rgb(103 232 249);          /* cyan-300 */
+    box-shadow: 0 0 8px rgba(34,211,238,0.2);
+  }
+
+  /* Project card */
+  .project-card {
+    border: 1px solid rgba(22,78,99,0.5); /* cyan-900/50 */
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    background-color: rgba(17,24,39,0.5); /* gray-900/50 */
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .project-card:hover {
+    border-color: rgba(34,211,238,0.5);
+    box-shadow: 0 0 32px rgba(34,211,238,0.12), 0 8px 32px rgba(0,0,0,0.5);
+    transform: translateY(-3px);
+  }
+
+  /* Cert card */
+  .cert-card {
+    border: 1px solid rgba(22,78,99,0.5); /* cyan-900/50 */
+    border-radius: 0.5rem;
+    padding: 1.25rem;
+    background-color: rgba(17,24,39,0.5); /* gray-900/50 */
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  .cert-card:hover {
+    border-color: rgba(34,211,238,0.5);
+    box-shadow: 0 0 20px rgba(34,211,238,0.12);
+    transform: translateY(-2px);
   }
 }
