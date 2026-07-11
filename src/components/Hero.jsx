@@ -21,7 +21,7 @@ export default function Hero({ data }) {
         loop
         muted
         playsInline
-        style={{ opacity: 0.55 }}
+        style={{ opacity: 0.75 }}
       >
         <source
           src="https://videos.pexels.com/video-files/2169880/2169880-hd_1920_1080_30fps.mp4"
@@ -29,11 +29,11 @@ export default function Hero({ data }) {
         />
       </video>
 
-      {/* ── Blue-tinted dark gradient overlay ───────────────────── */}
+      {/* ── Neutral dark gradient overlay ───────────────────────── */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(3,10,30,0.72) 0%, rgba(7,20,55,0.65) 40%, rgba(3,10,30,0.80) 100%)',
+          background: 'linear-gradient(to bottom, rgba(3,10,6,0.62) 0%, rgba(6,20,12,0.52) 40%, rgba(3,10,6,0.72) 100%)',
         }}
       />
 
@@ -41,7 +41,7 @@ export default function Hero({ data }) {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,5,20,0.55) 100%)',
+          background: 'radial-gradient(ellipse at center, transparent 50%, rgba(0,10,5,0.45) 100%)',
         }}
       />
 
@@ -50,15 +50,15 @@ export default function Hero({ data }) {
         <div className="hero-grid absolute inset-0" />
       </div>
 
-      {/* ── Cyan glow orbs ──────────────────────────────────────── */}
+      {/* ── Emerald glow orbs ───────────────────────────────────── */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full blur-[120px]"
-          style={{ background: 'radial-gradient(circle, rgba(34,211,238,0.09) 0%, transparent 70%)', animation: 'orbPulse 8s ease-in-out infinite' }}
+          style={{ background: 'radial-gradient(circle, rgba(52,211,153,0.09) 0%, transparent 70%)', animation: 'orbPulse 8s ease-in-out infinite' }}
         />
         <div
           className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[100px]"
-          style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%)', animation: 'orbPulse 10s ease-in-out infinite 3s' }}
+          style={{ background: 'radial-gradient(circle, rgba(34,197,94,0.08) 0%, transparent 70%)', animation: 'orbPulse 10s ease-in-out infinite 3s' }}
         />
       </div>
 
@@ -67,7 +67,7 @@ export default function Hero({ data }) {
 
         {/* Prompt label */}
         <div
-          className="mb-4 text-cyan-500 text-sm font-mono tracking-widest"
+          className="mb-4 text-emerald-500 text-sm font-mono tracking-widest"
           style={{ animation: 'fadeInUp 0.6s ease-out forwards' }}
         >
           <span className="animate-pulse">&gt;</span> initializing portfolio...
@@ -86,7 +86,7 @@ export default function Hero({ data }) {
           className="text-xl md:text-2xl text-gray-400 mb-6 font-mono min-h-[2rem]"
           style={{ animation: 'fadeInUp 0.7s ease-out 400ms both' }}
         >
-          <span className="text-cyan-400">~$</span> whoami <span className="text-gray-500">→</span>{' '}
+          <span className="text-emerald-400">~$</span> whoami <span className="text-gray-500">→</span>{' '}
           <span className={`text-white${!rolesDone ? ' cursor-blink' : ''}`}>{typedRole}</span>
         </div>
 
@@ -106,13 +106,13 @@ export default function Hero({ data }) {
           <Link
             to="/resume"
             target="_blank"
-            className="px-6 py-3 bg-cyan-500 text-gray-950 font-bold rounded hover:bg-cyan-400 transition-all text-sm tracking-wider shadow-lg hover:shadow-cyan-500/30"
+            className="px-6 py-3 bg-emerald-500 text-gray-950 font-bold rounded hover:bg-emerald-400 transition-all text-sm tracking-wider shadow-lg hover:shadow-emerald-500/30"
           >
             ↓ DOWNLOAD RESUME
           </Link>
           <a
             href="#projects"
-            className="px-6 py-3 border border-cyan-500/50 text-cyan-400 font-semibold rounded hover:bg-cyan-500/10 transition-all text-sm tracking-wider"
+            className="px-6 py-3 border border-emerald-500/50 text-emerald-400 font-semibold rounded hover:bg-emerald-500/10 transition-all text-sm tracking-wider"
           >
             VIEW PROJECTS
           </a>
@@ -120,7 +120,7 @@ export default function Hero({ data }) {
             href={contact.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-gray-700 text-gray-400 font-semibold rounded hover:border-cyan-500/50 hover:text-cyan-400 transition-all text-sm tracking-wider"
+            className="px-6 py-3 border border-gray-700 text-gray-400 font-semibold rounded hover:border-emerald-500/50 hover:text-emerald-400 transition-all text-sm tracking-wider"
           >
             LINKEDIN
           </a>
@@ -128,7 +128,7 @@ export default function Hero({ data }) {
             href={contact.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 border border-gray-700 text-gray-400 font-semibold rounded hover:border-cyan-500/50 hover:text-cyan-400 transition-all text-sm tracking-wider"
+            className="px-6 py-3 border border-gray-700 text-gray-400 font-semibold rounded hover:border-emerald-500/50 hover:text-emerald-400 transition-all text-sm tracking-wider"
           >
             GITHUB
           </a>
