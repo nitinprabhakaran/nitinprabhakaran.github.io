@@ -1,6 +1,4 @@
 import { useRef } from 'react'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
 
 function formatDate(dateStr) {
   if (dateStr === 'present') return 'Present'
@@ -23,29 +21,13 @@ const CATEGORY_LABELS = {
 export default function Resume({ data }) {
   const resumeRef = useRef(null)
 
-  const handleDownload = async () => {
-    if (!resumeRef.current) return
-
-    const canvas = await html2canvas(resumeRef.current, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: '#ffffff',
-    })
-
-    const imgData = canvas.toDataURL('image/png')
-    const pdf = new jsPDF('p', 'mm', 'a4')
-    const pdfWidth = pdf.internal.pageSize.getWidth()
-    const pdfHeight = pdf.internal.pageSize.getHeight()
-
-    const imgWidth = canvas.width
-    const imgHeight = canvas.height
-    const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight)
-    const imgX = (pdfWidth - imgWidth * ratio) / 2
-    const imgY = 0
-
-    pdf.addImage(imgData, 'PNG', imgX, imgY, imgWidth * ratio, imgHeight * ratio)
-    pdf.save('Nitin_Prabhakaran_Resume.pdf')
+  const handleDownload = () => {
+    const link = document.createElement('a')
+    link.href = '/files/Resume_NitinPrabhakaran.pdf'
+    link.download = 'Nitin_Prabhakaran_Resume.pdf'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   const { profile, contact, experience, skills, certifications } = data
