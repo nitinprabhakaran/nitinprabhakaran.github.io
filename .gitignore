@@ -39,3 +39,7 @@ dist-ssr/
 .env
 .env.local
 .env.production.local
+
+# Generated public assets (populated at build time by copy-assets.js)
+public/files/
+public/images/

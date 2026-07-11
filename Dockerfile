@@ -6,7 +6,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run yaml-to-json && node scripts/copy-assets.js && npm run build -- --emptyOutDir
+RUN npm run build
 
 FROM scratch
 COPY --from=builder /app/dist /dist
