@@ -54,7 +54,7 @@ export default function Projects({ data }) {
   return (
     <section id="projects" className="py-20 px-4 bg-gray-900/30">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading command="ls" args="-la ~/projects/" />
+        <SectionHeading command="ls -la" title="projects" />
         <div className="grid md:grid-cols-2 gap-6">
           {data.projects.map((project, i) => (
             <ProjectCard key={project.name} project={project} index={i} />

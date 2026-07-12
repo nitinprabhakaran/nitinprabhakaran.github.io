@@ -16,7 +16,7 @@ export default function Contact({ data }) {
   return (
     <section id="contact" className="py-20 px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <SectionHeading command="curl" args="-X GET /connect" className="mb-4" />
+        <SectionHeading command="curl" title="contact" className="mb-4" />
         <p
           className="text-gray-400 mb-12 text-sm"
           style={{

@@ -133,7 +133,7 @@ export default function Skills({ data }) {
   return (
     <section id="skills" className="py-20 px-4 bg-gray-900/30">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading command="which" args="[tools]" />
+        <SectionHeading command="which" title="skills" />
 
         <div className="grid md:grid-cols-2 gap-6">
           {categories.map(([category, items], cardIndex) => {

@@ -37,7 +37,7 @@ export default function Certifications({ data }) {
   return (
     <section id="certifications" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading command="ls" args="~/certifications/" />
+        <SectionHeading command="ls" title="certifications" />
         <div className="grid md:grid-cols-2 gap-4">
           {data.certifications.map((cert, i) => (
             <CertCard key={cert.name} cert={cert} index={i} />
