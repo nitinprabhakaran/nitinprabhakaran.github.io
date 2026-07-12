@@ -7,8 +7,25 @@ function formatDate(dateStr) {
   return `${months[parseInt(month) - 1]} ${year}`
 }
 
-function JobCard({ job, index }) {
+function companyRange(positions) {
+  const starts = positions.map(p => p.start).sort()
+  const ends   = positions.map(p => p.end)
+  const start  = starts[0]
+  const end    = ends.includes('present') ? 'present' : ends.sort().at(-1)
+  return { start, end }
+}
+
+function JobCard({ entry, index }) {
   const [ref, isVisible] = useScrollAnimation()
+  // Support both new {positions:[]} schema and legacy flat {role,start,end,highlights}
+  const positions = entry.positions || [{
+    role: entry.role,
+    start: entry.start,
+    end: entry.end,
+    highlights: entry.highlights || [],
+  }]
+  const { start, end } = companyRange(positions)
+  const isMulti = positions.length > 1
 
   return (
     <div
@@ -28,23 +45,41 @@ function JobCard({ job, index }) {
       </div>
 
       <div className="card-glow rounded-lg p-6 bg-gray-900/50 group">
-        <div className="flex flex-wrap items-start justify-between gap-2 mb-3">
-          <div>
-            <h3 className="text-xl font-bold text-white group-hover:text-emerald-100 transition-colors">{job.role}</h3>
-            <div className="text-emerald-400 font-semibold mt-1">{job.company}</div>
+        {/* Company header */}
+        <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+          <div className="text-emerald-400 font-bold text-lg group-hover:text-emerald-300 transition-colors">
+            {entry.company}
           </div>
           <div className="text-gray-500 text-sm font-mono bg-gray-900 px-3 py-1 rounded border border-gray-800">
-            {formatDate(job.start)} – {formatDate(job.end)}
+            {formatDate(start)} – {formatDate(end)}
           </div>
         </div>
-        <ul className="space-y-2 mt-4">
-          {job.highlights.map((h, j) => (
-            <li key={j} className="text-gray-400 text-sm flex gap-3">
-              <span className="text-emerald-500 mt-1 flex-shrink-0">▸</span>
-              <span>{h}</span>
-            </li>
+
+        {/* Positions */}
+        <div className={isMulti ? 'space-y-5' : ''}>
+          {positions.map((pos, pi) => (
+            <div key={pi} className={isMulti ? 'border-l-2 border-gray-700/60 pl-4' : ''}>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <h3 className="text-white font-bold text-base group-hover:text-emerald-100 transition-colors">
+                  {pos.role}
+                </h3>
+                {isMulti && (
+                  <span className="text-gray-600 text-xs font-mono">
+                    {formatDate(pos.start)} – {formatDate(pos.end)}
+                  </span>
+                )}
+              </div>
+              <ul className="space-y-2">
+                {pos.highlights.map((h, j) => (
+                  <li key={j} className="text-gray-400 text-sm flex gap-3">
+                    <span className="text-emerald-500 mt-1 flex-shrink-0">▸</span>
+                    <span>{h}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
   )
@@ -72,8 +107,8 @@ export default function Experience({ data }) {
           {/* Vertical timeline line */}
           <div className="absolute left-0 md:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-emerald-500 via-green-500 to-transparent opacity-30" />
           <div className="space-y-10">
-            {data.experience.map((job, i) => (
-              <JobCard key={i} job={job} index={i} />
+            {data.experience.map((entry, i) => (
+              <JobCard key={i} entry={entry} index={i} />
             ))}
           </div>
         </div>

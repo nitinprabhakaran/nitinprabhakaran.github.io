@@ -4,7 +4,8 @@ test.describe('Mobile navigation', () => {
   test.use({ viewport: { width: 390, height: 844 } })
 
   test.beforeEach(async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.waitForSelector('#root > *', { timeout: 20000 })
   })
 
   test('mobile menu button is visible on small screens', async ({ page }) => {
@@ -24,7 +25,8 @@ test.describe('Mobile navigation', () => {
 
 test.describe('Navigation scroll behaviour', () => {
   test('clicking a nav anchor scrolls to the target section', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.waitForSelector('#root > *', { timeout: 20000 })
     await page.getByRole('link', { name: /experience/i }).first().click()
     // The section must exist in the DOM and be attached; scrolling is SPA-internal
     const section = page.locator('#experience')
@@ -37,7 +39,8 @@ test.describe('Navigation scroll behaviour', () => {
 
 test.describe('Page routing', () => {
   test('navigating to /resume and back works', async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
+    await page.waitForSelector('#root > *', { timeout: 20000 })
     await page.locator('nav').getByRole('link', { name: /resume/i }).click()
     await expect(page).toHaveURL(/\/resume/)
     await expect(page.getByTestId('resume-name')).toBeVisible()

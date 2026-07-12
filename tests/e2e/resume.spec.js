@@ -2,7 +2,8 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Resume page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/resume')
+    await page.goto('/resume', { waitUntil: 'networkidle' })
+    await page.waitForSelector('#root > *', { timeout: 20000 })
   })
 
   test('resume page loads and shows candidate name', async ({ page }) => {

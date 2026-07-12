@@ -2,7 +2,9 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Home page', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/')
+    await page.goto('/', { waitUntil: 'networkidle' })
+    // Ensure React has mounted and rendered at least one child into #root
+    await page.waitForSelector('#root > *', { timeout: 20000 })
   })
 
   test('page title contains name', async ({ page }) => {
@@ -10,8 +12,8 @@ test.describe('Home page', () => {
   })
 
   test('hero section is visible with name and role', async ({ page }) => {
-    // Name appears in the hero heading
-    await expect(page.getByRole('heading', { name: /Nitin Prabhakaran/i }).first()).toBeVisible()
+    // profile.name is rendered inside <h1><span>…</span></h1>
+    await expect(page.locator('h1').filter({ hasText: /Nitin Prabhakaran/i })).toBeVisible()
   })
 
   test('navbar is visible and contains expected links', async ({ page }) => {
