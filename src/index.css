@@ -43,9 +43,16 @@
 }
 
 @keyframes techFloat {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  25%       { transform: translateY(-6px) rotate(-0.8deg); }
-  75%       { transform: translateY(-3px) rotate(0.8deg); }
+  0%, 100% { transform: translateY(0px)    rotate(0deg);   }
+  25%       { transform: translateY(-12px)  rotate(-1.5deg); }
+  75%       { transform: translateY(-6px)   rotate(1.5deg);  }
+}
+
+/* Neon glow pulse — runs at a different rate to the float so icons feel independent */
+@keyframes iconGlow {
+  0%, 100% { filter: drop-shadow(0 0 0px   rgba(52,211,153,0));   }
+  50%       { filter: drop-shadow(0 0 10px  rgba(52,211,153,0.65))
+                      drop-shadow(0 0 22px  rgba(52,211,153,0.25)); }
 }
 
 @keyframes orbPulse {

@@ -9,6 +9,12 @@ import {
   SiGithubcopilot, SiClaudecode,
   SiLangchain, SiLanggraph,
 } from 'react-icons/si'
+import { DiAws } from 'react-icons/di'
+
+// Locally hosted logos (images/logos/skills/, served via copy-assets.js)
+// These take precedence over react-icons entries in SKILL_ICON_MAP.
+// Currently empty — all skill icons use react-icons (see SKILL_ICON_MAP below).
+const LOCAL_SKILL_LOGOS = {}
 
 const CATEGORY_LABELS = {
   cloud:          'Cloud',
@@ -24,10 +30,10 @@ const CATEGORY_LABELS = {
 // react-icons/si components + brand colour per skill.
 // null = text-badge fallback (no icon exists in Simple Icons yet).
 const SKILL_ICON_MAP = {
-  'AWS':                 null,
+  'AWS':                 { Icon: DiAws,               color: '#FF9900' },
   'Azure':               null,
   'Terraform':           { Icon: SiTerraform,         color: '#7B42BC' },
-  'CloudFormation':      null,
+  'CloudFormation':      { Icon: DiAws,               color: '#FF9900' },
   'Azure ARM Templates': null,
   'OpenTofu':            { Icon: SiOpentofu,          color: '#FFDA18' },
   'Jenkins':             { Icon: SiJenkins,            color: '#D24939' },
@@ -46,8 +52,8 @@ const SKILL_ICON_MAP = {
   'Groovy':              { Icon: SiApachegroovy,       color: '#4298B8' },
   'GitHub Copilot':      { Icon: SiGithubcopilot,      color: '#ffffff' },
   'Claude Code':         { Icon: SiClaudecode,         color: '#D97757' },
-  'AWS Bedrock Agents':  null,
-  'AWS Strands Agents':  null,
+  'AWS Bedrock Agents':  { Icon: DiAws,               color: '#FF9900' },
+  'AWS Strands Agents':  { Icon: DiAws,               color: '#FF9900' },
   'Agno':                null,
   'LangChain':           { Icon: SiLangchain,          color: '#34D399' },
   'LangGraph':           { Icon: SiLanggraph,          color: '#34D399' },
@@ -57,16 +63,19 @@ const SKILL_ICON_MAP = {
 const FLOAT_DURATIONS = [3.2, 3.8, 4.4, 5.0, 3.6, 4.2, 4.8, 3.4]
 
 function SkillItem({ name, globalIndex }) {
-  const iconData = SKILL_ICON_MAP[name]
-  const duration = FLOAT_DURATIONS[globalIndex % FLOAT_DURATIONS.length]
-  const delay    = (globalIndex * 0.18).toFixed(2)
+  const iconData     = SKILL_ICON_MAP[name]
+  const localLogo    = LOCAL_SKILL_LOGOS[name]
+  const duration     = FLOAT_DURATIONS[globalIndex % FLOAT_DURATIONS.length]
+  const glowDuration = (duration * 1.4).toFixed(1)   // glow cycle ≠ float cycle → async feel
+  const delay        = (globalIndex * 0.18).toFixed(2)
+  const glowDelay    = (globalIndex * 0.11).toFixed(2)
 
   return (
     <div
       className="group flex flex-col items-center gap-1.5 cursor-default"
       style={{
-        animation: `techFloat ${duration}s ease-in-out infinite`,
-        animationDelay: `${delay}s`,
+        animation:      `techFloat ${duration}s ease-in-out infinite, iconGlow ${glowDuration}s ease-in-out infinite`,
+        animationDelay: `${delay}s, ${glowDelay}s`,
       }}
       title={name}
     >
@@ -77,12 +86,14 @@ function SkillItem({ name, globalIndex }) {
           'bg-gray-800/70 border border-gray-700/50',
           'transition-all duration-300',
           'group-hover:scale-110 group-hover:border-emerald-500/60 group-hover:bg-gray-700/80',
-          iconData ? 'p-2' : 'p-1',
+          (iconData || localLogo) ? 'p-2' : 'p-1',
         ].join(' ')}
         onMouseEnter={e => { e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(52,211,153,0.45))' }}
         onMouseLeave={e => { e.currentTarget.style.filter = 'none' }}
       >
-        {iconData ? (
+        {localLogo ? (
+          <img src={localLogo} alt={name} className="w-full h-full object-contain" />
+        ) : iconData ? (
           <iconData.Icon size={26} color={iconData.color} />
         ) : (
           <span className="text-emerald-400 text-[9px] font-bold font-mono leading-tight text-center">

@@ -2,6 +2,15 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import SectionHeading from './SectionHeading.jsx'
 import { formatDate, companyRange } from '../utils/resume.js'
 
+// Locally hosted company logos (images/logos/companies/ → served via copy-assets.js)
+// Drop new files into images/logos/companies/ and add the mapping here.
+const COMPANY_LOGOS = {
+  'Envestnet':            '/images/logos/companies/envestnet.jpg',
+  'Ameriprise Financial': '/images/logos/companies/ameriprise.png',
+  'Rakuten':              '/images/logos/companies/rakuten.gif',
+  'Ericsson':             '/images/logos/companies/ericsson.gif',
+}
+
 function JobCard({ entry, index }) {
   const [ref, isVisible] = useScrollAnimation()
   // Support both new {positions:[]} schema and legacy flat {role,start,end,highlights}
@@ -34,8 +43,17 @@ function JobCard({ entry, index }) {
       <div className="card-glow rounded-lg p-6 bg-gray-900/50 group">
         {/* Company header */}
         <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
-          <div className="text-emerald-400 font-bold text-lg group-hover:text-emerald-300 transition-colors">
-            {entry.company}
+          <div className="flex items-center gap-3">
+            {COMPANY_LOGOS[entry.company] && (
+              <img
+                src={COMPANY_LOGOS[entry.company]}
+                alt={entry.company}
+                className="h-6 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+              />
+            )}
+            <div className="text-emerald-400 font-bold text-lg group-hover:text-emerald-300 transition-colors">
+              {entry.company}
+            </div>
           </div>
           <div className="text-gray-500 text-sm font-mono bg-gray-900 px-3 py-1 rounded border border-gray-800">
             {formatDate(start)} – {formatDate(end)}
