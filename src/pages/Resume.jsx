@@ -1,7 +1,3 @@
-import { useRef } from 'react'
-import jsPDF from 'jspdf'
-import html2canvas from 'html2canvas'
-
 function formatDate(dateStr) {
   if (dateStr === 'present') return 'Present'
   const [year, month] = dateStr.split('-')
@@ -21,51 +17,16 @@ const CATEGORY_LABELS = {
 }
 
 export default function Resume({ data }) {
-  const resumeRef = useRef(null)
-
-  const handleDownload = async () => {
-    if (!resumeRef.current) return
-
-    const pdf = new jsPDF('p', 'pt', 'a4')
-    await pdf.html(resumeRef.current, {
-      callback: (doc) => doc.save('Nitin_Prabhakaran_Resume.pdf'),
-      margin: [0, 0, 0, 0],
-      autoPaging: 'text',
-      x: 0,
-      y: 0,
-      width: 499,
-      windowWidth: 794,
-      html2canvas: {
-        scale: 1.5,
-        useCORS: true,
-        backgroundColor: '#ffffff',
-        onclone: (clonedDoc) => {
-          const el = clonedDoc.querySelector('.resume-content')
-          if (el) {
-            el.style.padding = '30px 36px'
-            el.style.width = '499pt'
-            el.style.maxWidth = '499pt'
-            el.style.boxSizing = 'border-box'
-            el.style.fontSize = '10px'
-            const links = el.querySelectorAll('a')
-            links.forEach((a) => {
-              a.textContent = a.textContent.replace('https://', '')
-            })
-          }
-        },
-      },
-    })
-  }
-
-  const { profile, contact, experience, skills, certifications } = data
+  const { profile, contact, experience, skills, certifications, projects } = data
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Print controls - hidden on print */}
+      {/* Print controls – hidden on print */}
       <div className="no-print sticky top-0 bg-gray-100 border-b border-gray-200 px-6 py-3 flex justify-between items-center z-10">
         <span className="text-gray-600 text-sm font-mono">Nitin_Prabhakaran_Resume.pdf</span>
         <button
-          onClick={handleDownload}
+          data-testid="download-pdf-btn"
+          onClick={() => window.print()}
           className="px-5 py-2 bg-emerald-600 text-white rounded text-sm font-semibold hover:bg-emerald-700 transition-colors"
         >
           ↓ Download PDF
@@ -74,7 +35,6 @@ export default function Resume({ data }) {
 
       {/* Resume content */}
       <div
-        ref={resumeRef}
         className="resume-content max-w-[210mm] mx-auto bg-white text-sm leading-relaxed"
         style={{
           fontFamily: 'Arial, sans-serif',
@@ -88,7 +48,7 @@ export default function Resume({ data }) {
       >
         {/* Header */}
         <div className="border-b-2 pb-4 mb-6" style={{ borderColor: '#1f2937' }}>
-          <h1 className="text-3xl font-bold" style={{ color: '#111827' }}>{profile.name}</h1>
+          <h1 className="text-3xl font-bold" data-testid="resume-name" style={{ color: '#111827' }}>{profile.name}</h1>
           <div className="text-lg mt-1" style={{ color: '#4b5563' }}>{profile.title}</div>
           <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs" style={{ color: '#6b7280' }}>
             <span>{contact.email}</span>
@@ -115,7 +75,7 @@ export default function Resume({ data }) {
         <div className="mb-5">
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Experience</h2>
           {experience.map((job, i) => (
-            <div key={i} className="mb-4">
+            <div key={i} className="mb-4" style={{ breakInside: 'avoid' }}>
               <div className="flex justify-between items-start">
                 <div>
                   <div className="font-bold text-sm" style={{ color: '#111827' }}>{job.role}</div>
@@ -128,7 +88,7 @@ export default function Resume({ data }) {
               <ul className="mt-2 space-y-1">
                 {job.highlights.map((h, j) => (
                   <li key={j} className="text-xs flex gap-2" style={{ color: '#4b5563' }}>
-                    <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>-</span>
+                    <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>–</span>
                     <span>{h}</span>
                   </li>
                 ))}
@@ -138,25 +98,46 @@ export default function Resume({ data }) {
         </div>
 
         {/* Skills */}
-        <div className="mb-5">
+        <div className="mb-5" style={{ breakInside: 'avoid' }}>
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Technical Skills</h2>
           <div className="grid grid-cols-2 gap-x-4 gap-y-1">
             {Object.entries(skills).map(([cat, items]) => (
               <div key={cat} className="text-xs" style={{ color: '#374151' }}>
-                <span className="font-semibold" style={{ color: '#374151' }}>{CATEGORY_LABELS[cat] || cat}:</span>{' '}
+                <span className="font-semibold" style={{ color: '#374151' }}>{CATEGORY_LABELS[cat] || cat}:</span>{'  '}
                 <span style={{ color: '#4b5563' }}>{items.join(', ')}</span>
               </div>
             ))}
           </div>
         </div>
 
+        {/* Projects */}
+        {projects && projects.length > 0 && (
+          <div className="mb-5" style={{ breakInside: 'avoid' }}>
+            <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Key Projects</h2>
+            <ul className="space-y-2">
+              {projects.map((proj, i) => (
+                <li key={i} className="text-xs" style={{ breakInside: 'avoid' }}>
+                  <span className="font-semibold" style={{ color: '#111827' }}>{proj.name}</span>
+                  {proj.tags && (
+                    <span className="ml-2 font-mono" style={{ color: '#9ca3af' }}>
+                      [{proj.tags.join(', ')}]
+                    </span>
+                  )}
+                  <span style={{ color: '#9ca3af' }}> – </span>
+                  <span style={{ color: '#4b5563' }}>{proj.description}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         {/* Certifications */}
-        <div>
+        <div style={{ breakInside: 'avoid' }}>
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Certifications</h2>
           <ul className="grid grid-cols-2 gap-x-4 gap-y-1">
             {certifications.map((cert, i) => (
-              <li key={i} className="text-xs flex gap-2" style={{ color: '#374151' }}>
-                <span style={{ color: '#9ca3af' }}>-</span>
+              <li key={i} className="text-xs flex gap-2" style={{ color: '#374151', breakInside: 'avoid' }}>
+                <span style={{ color: '#9ca3af' }}>–</span>
                 <span style={{ color: '#4b5563' }}>{cert.name}</span>
               </li>
             ))}
@@ -166,21 +147,26 @@ export default function Resume({ data }) {
 
       <style>{`
         .resume-content, .resume-content * {
-          color-scheme: light !important;
+          color-scheme: light \!important;
         }
         .ats-link {
           color: #6b7280;
           text-decoration: none;
         }
-        .resume-content p,
-        .resume-content li,
-        .resume-content div {
-          page-break-inside: avoid;
-          break-inside: avoid;
-        }
         @media print {
-          .no-print { display: none !important; }
-          body { background: white; }
+          .no-print { display: none \!important; }
+          body { background: white \!important; margin: 0; }
+          .resume-content {
+            width: 100% \!important;
+            max-width: 100% \!important;
+            padding: 20mm 18mm \!important;
+            margin: 0 \!important;
+            box-shadow: none \!important;
+          }
+          @page {
+            size: A4;
+            margin: 0;
+          }
         }
       `}</style>
     </div>

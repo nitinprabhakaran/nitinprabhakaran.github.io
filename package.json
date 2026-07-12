@@ -9,19 +9,20 @@
     "preview": "vite preview",
     "yaml-to-json": "node scripts/yaml-to-json.js",
     "copy-assets": "node scripts/copy-assets.js",
-    "convert-css-oklch": "node scripts/convert-css-oklch.js"
+    "convert-css-oklch": "node scripts/convert-css-oklch.js",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^6.0.3",
-    "html2canvas": "^1.4.1",
     "js-yaml": "^5.2.1",
-    "jspdf": "^4.2.1",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.1",
     "vite": "^8.1.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@tailwindcss/vite": "^4.3.2",
     "colorjs.io": "^0.6.1",
     "playwright": "^1.61.1",
