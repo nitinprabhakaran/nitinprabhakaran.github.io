@@ -27,6 +27,15 @@ export function companyRange(positions) {
 }
 
 /**
+/**
+ * Replaces `{years}` in a summary template string with the computed years of experience.
+ * Add further `{placeholder}` tokens here as needed.
+ */
+export function interpolateSummary(summary, experience) {
+  return summary.replace('{years}', yearsOfExperience(experience))
+}
+
+/**
  * Calculates completed years of experience from the earliest position start date.
  * Returns 0 if experience array is empty.
  */

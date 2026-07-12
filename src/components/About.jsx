@@ -1,6 +1,6 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import SectionHeading from './SectionHeading.jsx'
-import { yearsOfExperience } from '../utils/resume.js'
+import { yearsOfExperience, interpolateSummary } from '../utils/resume.js'
 
 function AnimatedStat({ value, label, delay }) {
   const [ref, isVisible] = useScrollAnimation()
@@ -46,7 +46,7 @@ export default function About({ data }) {
           }}
         >
           <p className="text-gray-300 text-lg leading-relaxed mb-6">
-            {data.profile.summary}
+            {interpolateSummary(data.profile.summary, data.experience)}
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
             {stats.map(({ label, value }, i) => (

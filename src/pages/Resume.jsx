@@ -1,4 +1,4 @@
-import { formatDate, companyRange } from '../utils/resume.js'
+import { formatDate, companyRange, interpolateSummary } from '../utils/resume.js'
 
 const CATEGORY_LABELS = {
   cloud: 'Cloud',
@@ -69,7 +69,7 @@ export default function Resume({ data }) {
         {/* Summary */}
         <div className="mb-5">
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-2" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Professional Summary</h2>
-          <p className="text-xs leading-relaxed" style={{ color: '#4b5563' }}>{profile.summary}</p>
+          <p className="text-xs leading-relaxed" style={{ color: '#4b5563' }}>{interpolateSummary(profile.summary, experience)}</p>
         </div>
 
         {/* Experience */}
