@@ -34,7 +34,7 @@ export default function About({ data }) {
   return (
     <section id="about" className="py-20 px-4 bg-gray-900/30">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading>&gt; about.md</SectionHeading>
+        <SectionHeading command="cat" args="about.me" />
 
         <div
           ref={contentRef}

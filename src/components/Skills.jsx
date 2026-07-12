@@ -1,6 +1,14 @@
-import { useState } from 'react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import SectionHeading from './SectionHeading.jsx'
+import {
+  SiTerraform, SiOpentofu,
+  SiJenkins, SiGitlab, SiArgo,
+  SiDocker, SiKubernetes, SiHelm,
+  SiNewrelic, SiSumologic,
+  SiPython, SiGnubash, SiApachegroovy,
+  SiGithubcopilot, SiClaudecode,
+  SiLangchain, SiLanggraph,
+} from 'react-icons/si'
 
 const CATEGORY_LABELS = {
   cloud:          'Cloud',
@@ -13,45 +21,45 @@ const CATEGORY_LABELS = {
   ai_automation:  'AI & Automation',
 }
 
-// Simple Icons CDN: cdn.simpleicons.org/slug/hex  — null = text-badge fallback
-const SKILL_ICONS = {
-  'AWS':                 'https://cdn.simpleicons.org/amazonaws/FF9900',
-  'Azure':               'https://cdn.simpleicons.org/microsoftazure/0078D4',
-  'Terraform':           'https://cdn.simpleicons.org/terraform/7B42BC',
-  'CloudFormation':      'https://cdn.simpleicons.org/amazonaws/FF9900',
-  'Azure ARM Templates': 'https://cdn.simpleicons.org/microsoftazure/0078D4',
-  'OpenTofu':            'https://cdn.simpleicons.org/opentofu/FFDA18',
-  'Jenkins':             'https://cdn.simpleicons.org/jenkins/D24939',
-  'GitLab CI':           'https://cdn.simpleicons.org/gitlab/FC6D26',
-  'ArgoCD':              'https://cdn.simpleicons.org/argo/EF7B4D',
-  'Argo Workflows':      'https://cdn.simpleicons.org/argo/EF7B4D',
-  'Docker':              'https://cdn.simpleicons.org/docker/2496ED',
-  'Kubernetes':          'https://cdn.simpleicons.org/kubernetes/326CE5',
-  'Helm':                'https://cdn.simpleicons.org/helm/277FFF',
+// react-icons/si components + brand colour per skill.
+// null = text-badge fallback (no icon exists in Simple Icons yet).
+const SKILL_ICON_MAP = {
+  'AWS':                 null,
+  'Azure':               null,
+  'Terraform':           { Icon: SiTerraform,         color: '#7B42BC' },
+  'CloudFormation':      null,
+  'Azure ARM Templates': null,
+  'OpenTofu':            { Icon: SiOpentofu,          color: '#FFDA18' },
+  'Jenkins':             { Icon: SiJenkins,            color: '#D24939' },
+  'GitLab CI':           { Icon: SiGitlab,             color: '#FC6D26' },
+  'ArgoCD':              { Icon: SiArgo,               color: '#EF7B4D' },
+  'Argo Workflows':      { Icon: SiArgo,               color: '#EF7B4D' },
+  'Docker':              { Icon: SiDocker,             color: '#2496ED' },
+  'Kubernetes':          { Icon: SiKubernetes,         color: '#326CE5' },
+  'Helm':                { Icon: SiHelm,               color: '#277FFF' },
   'Kustomize':           null,
-  'New Relic':           'https://cdn.simpleicons.org/newrelic/1CE783',
-  'Sumo Logic':          'https://cdn.simpleicons.org/sumologic/6EB0FF',
-  'Python':              'https://cdn.simpleicons.org/python/3776AB',
-  'Bash':                'https://cdn.simpleicons.org/gnubash/4EAA25',
-  'Groovy':              'https://cdn.simpleicons.org/apachegroovy/4298B8',
-  'GitHub Copilot':      'https://cdn.simpleicons.org/githubcopilot/ffffff',
-  'Claude Code':         'https://cdn.simpleicons.org/anthropic/D97757',
-  'AWS Bedrock Agents':  'https://cdn.simpleicons.org/amazonaws/FF9900',
-  'AWS Strands Agents':  'https://cdn.simpleicons.org/amazonaws/FF9900',
+  'KEDA':                null,
+  'New Relic':           { Icon: SiNewrelic,           color: '#1CE783' },
+  'Sumo Logic':          { Icon: SiSumologic,          color: '#6EB0FF' },
+  'Python':              { Icon: SiPython,             color: '#3776AB' },
+  'Bash':                { Icon: SiGnubash,            color: '#4EAA25' },
+  'Groovy':              { Icon: SiApachegroovy,       color: '#4298B8' },
+  'GitHub Copilot':      { Icon: SiGithubcopilot,      color: '#ffffff' },
+  'Claude Code':         { Icon: SiClaudecode,         color: '#D97757' },
+  'AWS Bedrock Agents':  null,
+  'AWS Strands Agents':  null,
   'Agno':                null,
-  'LangChain':           'https://cdn.simpleicons.org/langchain/34D399',
-  'LangGraph':           null,
+  'LangChain':           { Icon: SiLangchain,          color: '#34D399' },
+  'LangGraph':           { Icon: SiLanggraph,          color: '#34D399' },
 }
 
-// Varying durations so icons never float in sync
+// Varying float durations so no two icons move in sync
 const FLOAT_DURATIONS = [3.2, 3.8, 4.4, 5.0, 3.6, 4.2, 4.8, 3.4]
 
 function SkillItem({ name, globalIndex }) {
-  const [imgOk, setImgOk] = useState(true)
-  const iconUrl  = SKILL_ICONS[name]
+  const iconData = SKILL_ICON_MAP[name]
   const duration = FLOAT_DURATIONS[globalIndex % FLOAT_DURATIONS.length]
   const delay    = (globalIndex * 0.18).toFixed(2)
-  const showIcon = iconUrl && imgOk
 
   return (
     <div
@@ -63,25 +71,19 @@ function SkillItem({ name, globalIndex }) {
       title={name}
     >
       {/* Icon tile */}
-      <div className={[
-        'w-11 h-11 flex items-center justify-center rounded-xl',
-        'bg-gray-800/70 border border-gray-700/50',
-        'transition-all duration-300',
-        'group-hover:scale-110 group-hover:border-emerald-500/60',
-        'group-hover:bg-gray-700/80',
-        showIcon ? 'p-2' : 'p-1',
-      ].join(' ')}
-        style={{ filter: 'drop-shadow(0 0 0px rgba(52,211,153,0))' }}
-        onMouseEnter={e => e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(52,211,153,0.45))'}
-        onMouseLeave={e => e.currentTarget.style.filter = 'drop-shadow(0 0 0px rgba(52,211,153,0))'}
+      <div
+        className={[
+          'w-11 h-11 flex items-center justify-center rounded-xl',
+          'bg-gray-800/70 border border-gray-700/50',
+          'transition-all duration-300',
+          'group-hover:scale-110 group-hover:border-emerald-500/60 group-hover:bg-gray-700/80',
+          iconData ? 'p-2' : 'p-1',
+        ].join(' ')}
+        onMouseEnter={e => { e.currentTarget.style.filter = 'drop-shadow(0 0 10px rgba(52,211,153,0.45))' }}
+        onMouseLeave={e => { e.currentTarget.style.filter = 'none' }}
       >
-        {showIcon ? (
-          <img
-            src={iconUrl}
-            alt={name}
-            className="w-full h-full object-contain"
-            onError={() => setImgOk(false)}
-          />
+        {iconData ? (
+          <iconData.Icon size={26} color={iconData.color} />
         ) : (
           <span className="text-emerald-400 text-[9px] font-bold font-mono leading-tight text-center">
             {name.length > 8 ? name.slice(0, 7) + '\u2026' : name}
@@ -131,7 +133,7 @@ export default function Skills({ data }) {
   return (
     <section id="skills" className="py-20 px-4 bg-gray-900/30">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading>&gt; skills.yaml</SectionHeading>
+        <SectionHeading command="which" args="[tools]" />
 
         <div className="grid md:grid-cols-2 gap-6">
           {categories.map(([category, items], cardIndex) => {

@@ -76,7 +76,7 @@ export default function Experience({ data }) {
   return (
     <section id="experience" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <SectionHeading>&gt; experience.log</SectionHeading>
+        <SectionHeading command="git log" args='--author="nitin"' />
 
         <div className="relative">
           {/* Vertical timeline line */}
