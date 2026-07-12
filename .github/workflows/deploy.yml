@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: dhi.io/node:26-alpine-dev
+      credentials:
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
