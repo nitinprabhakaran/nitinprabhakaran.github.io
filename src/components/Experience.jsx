@@ -42,14 +42,22 @@ function JobCard({ entry, index }) {
 
       <div className="card-glow rounded-lg p-6 bg-gray-900/50 group">
         {/* Company header */}
-        <div className="flex flex-wrap items-start justify-between gap-2 mb-4">
+        <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div className="flex items-center gap-3">
-            {COMPANY_LOGOS[entry.company] && (
-              <img
-                src={COMPANY_LOGOS[entry.company]}
-                alt={entry.company}
-                className="h-6 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-              />
+            {/* Logo badge — white bg so logos read clearly on dark cards */}
+            {COMPANY_LOGOS[entry.company] ? (
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-white flex items-center justify-center p-1.5 shadow-md">
+                <img
+                  src={COMPANY_LOGOS[entry.company]}
+                  alt={entry.company}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            ) : (
+              /* Fallback: emerald initial badge */
+              <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center">
+                <span className="text-emerald-400 font-bold text-lg">{entry.company[0]}</span>
+              </div>
             )}
             <div className="text-emerald-400 font-bold text-lg group-hover:text-emerald-300 transition-colors">
               {entry.company}
