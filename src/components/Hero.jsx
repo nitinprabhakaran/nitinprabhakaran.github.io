@@ -85,14 +85,6 @@ export default function Hero({ data }) {
           <span className={`text-white${!rolesDone ? ' cursor-blink' : ''}`}>{typedRole}</span>
         </div>
 
-        {/* Summary */}
-        <p
-          className="text-gray-400 text-lg max-w-2xl mb-8 leading-relaxed"
-          style={{ animation: 'fadeInUp 0.7s ease-out 600ms both' }}
-        >
-          {profile.summary}
-        </p>
-
         {/* Quick stats */}
         <div
           className="flex flex-wrap items-center gap-6 mb-10"
