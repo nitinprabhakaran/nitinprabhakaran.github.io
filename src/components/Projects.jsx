@@ -1,4 +1,5 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import SectionHeading from './SectionHeading.jsx'
 
 function ProjectCard({ project, index }) {
   const [ref, isVisible] = useScrollAnimation()
@@ -50,25 +51,13 @@ function ProjectCard({ project, index }) {
 }
 
 export default function Projects({ data }) {
-  const [headingRef, headingVisible] = useScrollAnimation()
-
   return (
     <section id="projects" className="py-20 px-4 bg-gray-900/30">
       <div className="max-w-4xl mx-auto">
-        <h2
-          ref={headingRef}
-          className="text-3xl font-bold mb-10 text-gradient font-mono"
-          style={{
-            opacity: headingVisible ? 1 : 0,
-            transform: headingVisible ? 'translateY(0)' : 'translateY(24px)',
-            transition: 'opacity 0.7s ease, transform 0.7s ease',
-          }}
-        >
-          &gt; projects.tf
-        </h2>
+        <SectionHeading>&gt; projects.tf</SectionHeading>
         <div className="grid md:grid-cols-2 gap-6">
           {data.projects.map((project, i) => (
-            <ProjectCard key={i} project={project} index={i} />
+            <ProjectCard key={project.name} project={project} index={i} />
           ))}
         </div>
       </div>

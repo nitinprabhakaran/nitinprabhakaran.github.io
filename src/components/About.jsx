@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import SectionHeading from './SectionHeading.jsx'
+import { yearsOfExperience } from '../utils/resume.js'
 
 function AnimatedStat({ value, label, delay }) {
   const [ref, isVisible] = useScrollAnimation()
@@ -21,10 +22,10 @@ function AnimatedStat({ value, label, delay }) {
 }
 
 export default function About({ data }) {
-  const [ref, isVisible] = useScrollAnimation()
+  const [contentRef, contentVisible] = useScrollAnimation()
 
   const stats = [
-    { label: 'Experience', value: '10+ Years' },
+    { label: 'Experience', value: `${yearsOfExperience(data.experience)}+ Years` },
     { label: 'Location',   value: data.profile.location },
     { label: 'Focus',      value: 'Platform Engineering' },
     { label: 'AI Adoption',value: 'Active' },
@@ -33,23 +34,14 @@ export default function About({ data }) {
   return (
     <section id="about" className="py-20 px-4 bg-gray-900/30">
       <div className="max-w-4xl mx-auto">
-        <h2
-          className="text-3xl font-bold mb-10 text-gradient font-mono"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-            transition: 'opacity 0.7s ease, transform 0.7s ease',
-          }}
-          ref={ref}
-        >
-          &gt; about.md
-        </h2>
+        <SectionHeading>&gt; about.md</SectionHeading>
 
         <div
+          ref={contentRef}
           className="terminal-border rounded-lg p-8"
           style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(28px)',
+            opacity: contentVisible ? 1 : 0,
+            transform: contentVisible ? 'translateY(0)' : 'translateY(28px)',
             transition: 'opacity 0.7s ease 150ms, transform 0.7s ease 150ms',
           }}
         >

@@ -1,8 +1,9 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import SectionHeading from './SectionHeading.jsx'
 
 export default function Contact({ data }) {
   const { contact, profile } = data
-  const [ref, isVisible] = useScrollAnimation()
+  const [contentRef, contentVisible] = useScrollAnimation()
 
   const links = [
     { label: 'Email',    value: contact.email,                        href: `mailto:${contact.email}` },
@@ -15,21 +16,11 @@ export default function Contact({ data }) {
   return (
     <section id="contact" className="py-20 px-4">
       <div className="max-w-4xl mx-auto text-center">
-        <h2
-          ref={ref}
-          className="text-3xl font-bold mb-4 text-gradient font-mono"
-          style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(24px)',
-            transition: 'opacity 0.7s ease, transform 0.7s ease',
-          }}
-        >
-          &gt; contact.sh
-        </h2>
+        <SectionHeading className="mb-4">&gt; contact.sh</SectionHeading>
         <p
           className="text-gray-400 mb-12 text-sm"
           style={{
-            opacity: isVisible ? 1 : 0,
+            opacity: contentVisible ? 1 : 0,
             transition: 'opacity 0.7s ease 150ms',
           }}
         >
@@ -45,8 +36,8 @@ export default function Contact({ data }) {
               rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
               className="terminal-border rounded-lg p-4 hover:border-emerald-500/50 transition-all duration-300 group"
               style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                opacity: contentVisible ? 1 : 0,
+                transform: contentVisible ? 'translateY(0)' : 'translateY(20px)',
                 transition: `opacity 0.5s ease ${200 + i * 80}ms, transform 0.5s ease ${200 + i * 80}ms, border-color 0.3s ease`,
               }}
             >
@@ -57,9 +48,10 @@ export default function Contact({ data }) {
         </div>
 
         <footer
+          ref={contentRef}
           className="border-t border-gray-800 pt-8 text-gray-600 text-sm"
           style={{
-            opacity: isVisible ? 1 : 0,
+            opacity: contentVisible ? 1 : 0,
             transition: 'opacity 0.7s ease 700ms',
           }}
         >

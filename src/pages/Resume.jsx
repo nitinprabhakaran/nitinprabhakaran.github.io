@@ -1,17 +1,4 @@
-function companyRange(positions) {
-  const starts = positions.map(p => p.start).sort()
-  const ends   = positions.map(p => p.end)
-  const start  = starts[0]
-  const end    = ends.includes('present') ? 'present' : ends.sort().at(-1)
-  return { start, end }
-}
-
-function formatDate(dateStr) {
-  if (dateStr === 'present') return 'Present'
-  const [year, month] = dateStr.split('-')
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-  return `${months[parseInt(month) - 1]} ${year}`
-}
+import { formatDate, companyRange } from '../utils/resume.js'
 
 const CATEGORY_LABELS = {
   cloud: 'Cloud',

@@ -1,4 +1,5 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import SectionHeading from './SectionHeading.jsx'
 
 function CertCard({ cert, index }) {
   const [ref, isVisible] = useScrollAnimation()
@@ -33,25 +34,13 @@ function CertCard({ cert, index }) {
 }
 
 export default function Certifications({ data }) {
-  const [headingRef, headingVisible] = useScrollAnimation()
-
   return (
     <section id="certifications" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <h2
-          ref={headingRef}
-          className="text-3xl font-bold mb-10 text-gradient font-mono"
-          style={{
-            opacity: headingVisible ? 1 : 0,
-            transform: headingVisible ? 'translateY(0)' : 'translateY(24px)',
-            transition: 'opacity 0.7s ease, transform 0.7s ease',
-          }}
-        >
-          &gt; certifications.json
-        </h2>
+        <SectionHeading>&gt; certifications.json</SectionHeading>
         <div className="grid md:grid-cols-2 gap-4">
           {data.certifications.map((cert, i) => (
-            <CertCard key={i} cert={cert} index={i} />
+            <CertCard key={cert.name} cert={cert} index={i} />
           ))}
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 const SECTIONS = ['about', 'experience', 'skills', 'certifications', 'projects', 'contact']
 
@@ -73,6 +73,7 @@ export default function Navbar({ data }) {
             <Link
               to="/resume"
               target="_blank"
+              rel="noopener noreferrer"
               className="ml-4 px-4 py-1.5 bg-emerald-500/10 border border-emerald-500/50 text-emerald-400 rounded hover:bg-emerald-500/20 transition-all text-xs font-semibold tracking-wider"
             >
               RESUME
@@ -115,6 +116,7 @@ export default function Navbar({ data }) {
             <Link
               to="/resume"
               target="_blank"
+              rel="noopener noreferrer"
               className="text-emerald-400 font-semibold"
               onClick={() => setMenuOpen(false)}
             >

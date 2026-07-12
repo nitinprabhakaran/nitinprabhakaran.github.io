@@ -1,19 +1,6 @@
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-
-function formatDate(dateStr) {
-  if (dateStr === 'present') return 'Present'
-  const [year, month] = dateStr.split('-')
-  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-  return `${months[parseInt(month) - 1]} ${year}`
-}
-
-function companyRange(positions) {
-  const starts = positions.map(p => p.start).sort()
-  const ends   = positions.map(p => p.end)
-  const start  = starts[0]
-  const end    = ends.includes('present') ? 'present' : ends.sort().at(-1)
-  return { start, end }
-}
+import SectionHeading from './SectionHeading.jsx'
+import { formatDate, companyRange } from '../utils/resume.js'
 
 function JobCard({ entry, index }) {
   const [ref, isVisible] = useScrollAnimation()
@@ -58,7 +45,7 @@ function JobCard({ entry, index }) {
         {/* Positions */}
         <div className={isMulti ? 'space-y-5' : ''}>
           {positions.map((pos, pi) => (
-            <div key={pi} className={isMulti ? 'border-l-2 border-gray-700/60 pl-4' : ''}>
+            <div key={pos.role} className={isMulti ? 'border-l-2 border-gray-700/60 pl-4' : ''}>
               <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
                 <h3 className="text-white font-bold text-base group-hover:text-emerald-100 transition-colors">
                   {pos.role}
@@ -86,22 +73,10 @@ function JobCard({ entry, index }) {
 }
 
 export default function Experience({ data }) {
-  const [headingRef, headingVisible] = useScrollAnimation()
-
   return (
     <section id="experience" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
-        <h2
-          ref={headingRef}
-          className="text-3xl font-bold mb-10 text-gradient font-mono"
-          style={{
-            opacity: headingVisible ? 1 : 0,
-            transform: headingVisible ? 'translateY(0)' : 'translateY(24px)',
-            transition: 'opacity 0.7s ease, transform 0.7s ease',
-          }}
-        >
-          &gt; experience.log
-        </h2>
+        <SectionHeading>&gt; experience.log</SectionHeading>
 
         <div className="relative">
           {/* Vertical timeline line */}

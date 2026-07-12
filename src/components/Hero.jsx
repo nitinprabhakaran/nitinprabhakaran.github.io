@@ -1,11 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useTypewriter } from '../hooks/useTypewriter'
-
-const STAGGER = (i) => ({
-  opacity: 1,
-  transform: 'translateY(0)',
-  transition: `opacity 0.7s ease ${i * 150}ms, transform 0.7s ease ${i * 150}ms`,
-})
+import { yearsOfExperience } from '../utils/resume.js'
 
 export default function Hero({ data }) {
   const { profile, contact } = data
@@ -92,11 +87,31 @@ export default function Hero({ data }) {
 
         {/* Summary */}
         <p
-          className="text-gray-400 text-lg max-w-2xl mb-10 leading-relaxed"
+          className="text-gray-400 text-lg max-w-2xl mb-8 leading-relaxed"
           style={{ animation: 'fadeInUp 0.7s ease-out 600ms both' }}
         >
           {profile.summary}
         </p>
+
+        {/* Quick stats */}
+        <div
+          className="flex flex-wrap items-center gap-6 mb-10"
+          style={{ animation: 'fadeInUp 0.7s ease-out 700ms both' }}
+        >
+          {[
+            { value: `${yearsOfExperience(data.experience)}+`, label: 'Yrs Experience' },
+            { value: `${Object.values(data.skills).flat().length}+`, label: 'Tools & Platforms' },
+            { value: `${data.certifications.length}`,               label: 'Certifications' },
+          ].map(({ value, label }, i) => (
+            <div key={label} className="flex items-center gap-6">
+              {i > 0 && <div className="h-8 w-px bg-gray-700" />}
+              <div>
+                <div className="text-2xl font-bold text-emerald-400 font-mono leading-none">{value}</div>
+                <div className="text-gray-500 text-[11px] font-mono tracking-widest uppercase mt-0.5">{label}</div>
+              </div>
+            </div>
+          ))}
+        </div>
 
         {/* CTA buttons */}
         <div
