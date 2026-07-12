@@ -20,6 +20,20 @@ const resume = JSON.parse(
   fs.readFileSync(path.join(root, 'src', 'data', 'resume.json'), 'utf8')
 )
 
+// ── Resolve {years} placeholder (mirrors interpolateSummary in utils/resume.js) ──
+const allStarts = resume.experience
+  .flatMap(e => (e.positions || [{ start: e.start }]).map(p => p.start))
+  .filter(Boolean)
+  .sort()
+const years = allStarts.length
+  ? (() => {
+      const [y, m] = allStarts[0].split('-').map(Number)
+      const now    = new Date()
+      return Math.floor((now.getFullYear() - y) + (now.getMonth() + 1 - m) / 12)
+    })()
+  : 9
+resume.profile.summary = resume.profile.summary.replace('{years}', String(years))
+
 const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
 function fmtDate(d) {
   if (d === 'present') return 'Present'

@@ -119,9 +119,19 @@ export default function Chat() {
         <button
           onClick={() => setOpen(true)}
           aria-label="Open AI chat"
-          className="fixed bottom-6 right-6 z-50 w-12 h-12 bg-gray-950 border border-emerald-500/50 rounded-lg flex items-center justify-center shadow-lg shadow-black/40 hover:border-emerald-400 hover:shadow-emerald-500/20 transition-all group"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-2.5
+                     bg-gray-950 border border-emerald-500/60 rounded-full
+                     shadow-lg shadow-black/40
+                     hover:border-emerald-400 hover:shadow-emerald-500/25
+                     transition-all duration-300 group"
+          style={{ boxShadow: '0 0 0 0 rgba(52,211,153,0.4)', animation: 'chatPulse 2.5s ease-out infinite' }}
         >
-          <span className="text-emerald-400 font-mono text-base group-hover:animate-pulse select-none">&gt;_</span>
+          <span className="text-emerald-400 font-mono text-sm select-none">&gt;_</span>
+          <span className="text-emerald-400 text-xs font-semibold tracking-wide">Ask AI</span>
+          {/* NEW badge */}
+          <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-gray-950 text-[9px] font-bold px-1.5 py-0.5 rounded-full leading-none">
+            AI
+          </span>
         </button>
       )}
 

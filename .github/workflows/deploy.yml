@@ -42,6 +42,29 @@ jobs:
         with:
           path: ./dist
 
+  deploy-worker:
+    name: Deploy Cloudflare Worker
+    needs: build          # run after build so resume-context.js is fresh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Regenerate resume context
+        run: node scripts/yaml-to-json.js && node scripts/generate-resume-context.js
+
+      - name: Deploy worker
+        working-directory: worker
+        run: npm ci && npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN:  ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
