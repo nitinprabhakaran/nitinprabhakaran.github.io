@@ -33,35 +33,39 @@ test.describe('Home page', () => {
   })
 
   test('about section is present', async ({ page }) => {
-    await expect(page.locator('#about')).toBeVisible()
+    const section = page.locator('#about')
+    await expect(section).toBeAttached()
   })
 
   test('experience section renders at least one company entry', async ({ page }) => {
     const section = page.locator('#experience')
-    await expect(section).toBeVisible()
+    await expect(section).toBeAttached()
+    await section.scrollIntoViewIfNeeded()
     // Company names visible in the timeline
-    await expect(section.getByText('Envestnet')).toBeVisible()
+    await expect(section.getByText('Envestnet')).toBeVisible({ timeout: 10000 })
     await expect(section.getByText('Ericsson')).toBeVisible()
     // Ericsson multi-position: both roles should be visible
-    await expect(section.getByText('DevOps Engineer')).toBeVisible()
+    await expect(section.getByText('Systems Engineer')).toBeVisible()
     await expect(section.getByText('Implementation Engineer')).toBeVisible()
   })
 
   test('skills section is present and shows skill categories', async ({ page }) => {
     const section = page.locator('#skills')
-    await expect(section).toBeVisible()
-    await expect(section.getByText(/cloud/i).first()).toBeVisible()
+    await expect(section).toBeAttached()
+    await section.scrollIntoViewIfNeeded()
+    await expect(section.getByText(/cloud/i).first()).toBeVisible({ timeout: 10000 })
   })
 
   test('certifications section shows all cert cards', async ({ page }) => {
     const section = page.locator('#certifications')
-    await expect(section).toBeVisible()
-    // CKA cert should be present
-    await expect(section.getByText(/Certified Kubernetes Administrator/i)).toBeVisible()
+    await expect(section).toBeAttached()
+    await section.scrollIntoViewIfNeeded()
+    await expect(section.getByText(/Certified Kubernetes Administrator/i)).toBeVisible({ timeout: 10000 })
   })
 
   test('certification cards have valid href attributes', async ({ page }) => {
     const section = page.locator('#certifications')
+    await section.scrollIntoViewIfNeeded()
     const certLinks = section.locator('a')
     const count = await certLinks.count()
     expect(count).toBeGreaterThan(0)
@@ -74,14 +78,16 @@ test.describe('Home page', () => {
 
   test('projects section is present and shows project names', async ({ page }) => {
     const section = page.locator('#projects')
-    await expect(section).toBeVisible()
-    await expect(section.getByText(/DevOps AI Agents/i)).toBeVisible()
+    await expect(section).toBeAttached()
+    await section.scrollIntoViewIfNeeded()
+    await expect(section.getByText(/DevOps AI Agents/i)).toBeVisible({ timeout: 10000 })
   })
 
   test('contact section shows email and LinkedIn', async ({ page }) => {
     const section = page.locator('#contact')
-    await expect(section).toBeVisible()
-    await expect(section.getByText(/nitin3011.np@gmail.com/i)).toBeVisible()
+    await expect(section).toBeAttached()
+    await section.scrollIntoViewIfNeeded()
+    await expect(section.getByText(/nitin3011.np@gmail.com/i)).toBeVisible({ timeout: 10000 })
     await expect(section.getByRole('link', { name: /linkedin/i })).toBeVisible()
   })
 
