@@ -11,6 +11,7 @@ pids
 
 # Dependencies
 node_modules/
+worker/node_modules/
 .npm
 
 # Build

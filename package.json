@@ -4,10 +4,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "npm run yaml-to-json && npm run copy-assets && vite",
-    "build": "node scripts/yaml-to-json.js && node scripts/copy-assets.js && vite build && node scripts/convert-css-oklch.js",
+    "dev": "npm run yaml-to-json && npm run generate-resume-context && npm run copy-assets && vite",
+    "build": "node scripts/yaml-to-json.js && node scripts/generate-resume-context.js && node scripts/copy-assets.js && vite build && node scripts/convert-css-oklch.js",
     "preview": "vite preview",
     "yaml-to-json": "node scripts/yaml-to-json.js",
+    "generate-resume-context": "node scripts/generate-resume-context.js",
     "copy-assets": "node scripts/copy-assets.js",
     "convert-css-oklch": "node scripts/convert-css-oklch.js",
     "test": "playwright test",

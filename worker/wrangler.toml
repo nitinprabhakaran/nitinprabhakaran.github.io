@@ -1,0 +1,10 @@
+name = "nitin-portfolio-chat"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# Deployed at: https://nitin-portfolio-chat.nitin3011-np.workers.dev
+workers_dev  = true
+preview_urls = false
+
+[vars]
+ALLOWED_ORIGIN = "https://nitinprabhakaran.github.io"

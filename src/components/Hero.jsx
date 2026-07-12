@@ -6,6 +6,12 @@ export default function Hero({ data }) {
   const { profile, contact } = data
   const [typedRole, rolesDone] = useTypewriter(profile.title, 52, 900)
 
+  // Derive current employer from experience — the position with end: 'present'
+  const currentEntry = data.experience.find(e =>
+    (e.positions || []).some(p => p.end === 'present')
+  )
+  const currentCompany = currentEntry?.company || null
+
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 pt-20 overflow-hidden bg-gray-950">
 
@@ -67,6 +73,17 @@ export default function Hero({ data }) {
         >
           <span className="animate-pulse">&gt;</span> initializing portfolio...
         </div>
+
+        {/* Current employer badge */}
+        {currentCompany && (
+          <div
+            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-5"
+            style={{ animation: 'fadeInUp 0.6s ease-out 100ms both' }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            currently @ {currentCompany}
+          </div>
+        )}
 
         {/* Name */}
         <h1
