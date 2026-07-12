@@ -13,41 +13,51 @@ contact:
 
 experience:
   - company: "Envestnet"
-    role: "Senior Lead DevOps Engineer"
-    start: "2025-02"
-    end: "present"
-    highlights:
-      - "Driving AI adoption within the DevOps function; building internal agents to streamline CI/CD, infrastructure analysis, and self-service support workflows."
-      - "Introduced a front-end DevOps support agent integrated with a knowledge-base agent to enrich tickets, surface known solutions, and accelerate issue resolution."
-      - "Mentoring junior engineers on cross-team solution design, architecture, and end-to-end automation delivery."
-      - "Standardizing platform workflows through shared Helm charts, reusable Terraform modules, and DRY-based practices across microservices."
-      - "Applying scaling and cost-optimization strategies to reduce non-production cloud spend."
+    positions:
+      - role: "Senior Lead DevOps Engineer"
+        start: "2025-02"
+        end: "present"
+        highlights:
+          - "Driving AI adoption within the DevOps function; building internal agents to streamline CI/CD, infrastructure analysis, and self-service support workflows."
+          - "Introduced a front-end DevOps support agent integrated with a knowledge-base agent to enrich tickets, surface known solutions, and accelerate issue resolution."
+          - "Mentoring junior engineers on cross-team solution design, architecture, and end-to-end automation delivery."
+          - "Standardizing platform workflows through shared Helm charts, reusable Terraform modules, and DRY-based practices across microservices."
+          - "Applying scaling and cost-optimization strategies to reduce non-production cloud spend."
 
   - company: "Ameriprise Financial"
-    role: "Lead Engineer – Cloud and DevOps"
-    start: "2021-10"
-    end: "2025-02"
-    highlights:
-      - "Developed Ansible-based automation to reduce repetitive operations and improve efficiency for the CIS team."
-      - "Partnered with cloud and infrastructure teams to automate cross-functional processes, reporting, and routine maintenance cycles."
-      - "Built automation, playbooks, and scripts to support on-premises-to-AWS migration initiatives."
-      - "Created automation frameworks for disaster recovery setup and operational readiness."
+    positions:
+      - role: "Lead Engineer – Cloud and DevOps"
+        start: "2021-10"
+        end: "2025-02"
+        highlights:
+          - "Developed Ansible-based automation to reduce repetitive operations and improve efficiency for the CIS team."
+          - "Partnered with cloud and infrastructure teams to automate cross-functional processes, reporting, and routine maintenance cycles."
+          - "Built automation, playbooks, and scripts to support on-premises-to-AWS migration initiatives."
+          - "Created automation frameworks for disaster recovery setup and operational readiness."
 
   - company: "Rakuten"
-    role: "Systems Engineer (DevOps and Automation)"
-    start: "2021-01"
-    end: "2021-10"
-    highlights:
-      - "Delivered CI/CD operations and SaaS application deployments for client engagements."
-      - "Supported cloud migration initiatives from public cloud to Rakuten OneCloud."
+    positions:
+      - role: "Systems Engineer (DevOps and Automation)"
+        start: "2021-01"
+        end: "2021-10"
+        highlights:
+          - "Delivered CI/CD operations and SaaS application deployments for client engagements."
+          - "Supported cloud migration initiatives from public cloud to Rakuten OneCloud."
 
   - company: "Ericsson"
-    role: "Implementation Engineer"
-    start: "2017-03"
-    end: "2021-01"
-    highlights:
-      - "Started as a Support Engineer performing maintenance operations for charging system servers."
-      - "Later moved into a DevOps Engineer role, driving CI/CD for charging system applications to Azure Cloud."
+    positions:
+      - role: "DevOps Engineer"
+        start: "2019-06"  # update to exact transition date if known
+        end: "2021-01"
+        highlights:
+          - "Drove CI/CD for charging system applications to Azure Cloud."
+          - "Managed deployments and release pipelines for network charging systems."
+      - role: "Implementation Engineer"
+        start: "2017-03"
+        end: "2019-06"  # update to exact transition date if known
+        highlights:
+          - "Performed maintenance and operational support for charging system servers."
+          - "Handled implementation and commissioning tasks for telecom charging systems."
 
 skills:
   cloud: ["AWS", "Azure"]

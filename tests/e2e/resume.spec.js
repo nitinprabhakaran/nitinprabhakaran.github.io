@@ -39,12 +39,16 @@ test.describe('Resume page', () => {
     await expect(page.getByText(/DevOps leader/i)).toBeVisible()
   })
 
-  test('resume shows Experience section with all jobs', async ({ page }) => {
+  test('resume shows Experience section with all companies and roles', async ({ page }) => {
     await expect(page.getByText(/Experience/i).first()).toBeVisible()
+    // Company names
     await expect(page.getByText('Envestnet')).toBeVisible()
     await expect(page.getByText('Ameriprise Financial')).toBeVisible()
     await expect(page.getByText('Rakuten')).toBeVisible()
     await expect(page.getByText('Ericsson')).toBeVisible()
+    // Ericsson has two positions – both roles should appear
+    await expect(page.getByText('DevOps Engineer')).toBeVisible()
+    await expect(page.getByText('Implementation Engineer')).toBeVisible()
   })
 
   test('resume shows Technical Skills section', async ({ page }) => {
@@ -66,10 +70,12 @@ test.describe('Resume page', () => {
   })
 
   test('resume header contains contact details', async ({ page }) => {
-    await expect(page.getByText('nitin3011.np@gmail.com')).toBeVisible()
+    await expect(page.getByText(/nitin3011\.np@gmail\.com/)).toBeVisible()
     await expect(page.getByText('India')).toBeVisible()
-    await expect(page.getByRole('link', { name: /linkedin.com/i })).toBeVisible()
-    await expect(page.getByRole('link', { name: /github.com/i })).toBeVisible()
+    await expect(page.getByText('LinkedIn:')).toBeVisible()
+    await expect(page.getByText('GitHub:')).toBeVisible()
+    await expect(page.getByRole('link', { name: /linkedin\.com/i })).toBeVisible()
+    await expect(page.getByRole('link', { name: /github\.com\/nitin/i })).toBeVisible()
   })
 
   test('resume LinkedIn link points to correct profile', async ({ page }) => {

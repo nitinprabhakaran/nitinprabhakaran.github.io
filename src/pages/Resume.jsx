@@ -1,3 +1,11 @@
+function companyRange(positions) {
+  const starts = positions.map(p => p.start).sort()
+  const ends   = positions.map(p => p.end)
+  const start  = starts[0]
+  const end    = ends.includes('present') ? 'present' : ends.sort().at(-1)
+  return { start, end }
+}
+
 function formatDate(dateStr) {
   if (dateStr === 'present') return 'Present'
   const [year, month] = dateStr.split('-')
@@ -50,18 +58,24 @@ export default function Resume({ data }) {
         <div className="border-b-2 pb-4 mb-6" style={{ borderColor: '#1f2937' }}>
           <h1 className="text-3xl font-bold" data-testid="resume-name" style={{ color: '#111827' }}>{profile.name}</h1>
           <div className="text-lg mt-1" style={{ color: '#4b5563' }}>{profile.title}</div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-3 text-xs" style={{ color: '#6b7280' }}>
-            <span>{contact.email}</span>
-            <span>{contact.phone}</span>
-            <span>{profile.location}</span>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 mt-3 text-xs" style={{ color: '#6b7280' }}>
+            <span><span className="font-semibold" style={{ color: '#374151' }}>Email:</span> {contact.email}</span>
+            <span><span className="font-semibold" style={{ color: '#374151' }}>Phone:</span> {contact.phone}</span>
+            <span><span className="font-semibold" style={{ color: '#374151' }}>Location:</span> {profile.location}</span>
           </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1 text-xs" style={{ color: '#6b7280' }}>
-            <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="ats-link">
-              linkedin.com/in/nitinprabhakaran3011
-            </a>
-            <a href={contact.github} target="_blank" rel="noopener noreferrer" className="ats-link">
-              github.com/nitinprabhakaran
-            </a>
+          <div className="flex flex-wrap gap-x-5 gap-y-1 mt-1 text-xs" style={{ color: '#6b7280' }}>
+            <span>
+              <span className="font-semibold" style={{ color: '#374151' }}>LinkedIn:</span>{' '}
+              <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" className="ats-link">
+                linkedin.com/in/nitinprabhakaran3011
+              </a>
+            </span>
+            <span>
+              <span className="font-semibold" style={{ color: '#374151' }}>GitHub:</span>{' '}
+              <a href={contact.github} target="_blank" rel="noopener noreferrer" className="ats-link">
+                github.com/nitinprabhakaran
+              </a>
+            </span>
           </div>
         </div>
 
@@ -74,27 +88,51 @@ export default function Resume({ data }) {
         {/* Experience */}
         <div className="mb-5">
           <h2 className="text-sm font-bold uppercase tracking-wider border-b pb-1 mb-3" style={{ color: '#1f2937', borderColor: '#d1d5db' }}>Experience</h2>
-          {experience.map((job, i) => (
-            <div key={i} className="mb-4" style={{ breakInside: 'avoid' }}>
-              <div className="flex justify-between items-start">
-                <div>
-                  <div className="font-bold text-sm" style={{ color: '#111827' }}>{job.role}</div>
-                  <div className="text-xs" style={{ color: '#4b5563' }}>{job.company}</div>
+          {experience.map((entry, i) => {
+            const positions = entry.positions
+            const { start, end } = companyRange(positions)
+            const isMulti = positions.length > 1
+            return (
+              <div key={i} className="mb-4" style={{ breakInside: 'avoid' }}>
+                {/* Company row */}
+                <div className="flex justify-between items-start">
+                  <div className="font-bold text-sm" style={{ color: '#111827' }}>{entry.company}</div>
+                  <div className="text-xs font-mono whitespace-nowrap" style={{ color: '#6b7280' }}>
+                    {formatDate(start)} – {formatDate(end)}
+                  </div>
                 </div>
-                <div className="text-xs font-mono whitespace-nowrap" style={{ color: '#6b7280' }}>
-                  {formatDate(job.start)} – {formatDate(job.end)}
+
+                {/* Positions */}
+                <div className={isMulti ? 'mt-2 space-y-2' : 'mt-1'}>
+                  {positions.map((pos, pi) => (
+                    <div key={pi} style={{ breakInside: 'avoid' }}>
+                      <div className="flex justify-between items-baseline">
+                        <div
+                          className={isMulti ? 'text-xs font-semibold' : 'text-xs'}
+                          style={{ color: '#374151', paddingLeft: isMulti ? '8px' : '0' }}
+                        >
+                          {pos.role}
+                        </div>
+                        {isMulti && (
+                          <div className="text-xs font-mono whitespace-nowrap" style={{ color: '#9ca3af' }}>
+                            {formatDate(pos.start)} – {formatDate(pos.end)}
+                          </div>
+                        )}
+                      </div>
+                      <ul className="mt-1 space-y-0.5" style={{ paddingLeft: isMulti ? '8px' : '0' }}>
+                        {pos.highlights.map((h, j) => (
+                          <li key={j} className="text-xs flex gap-2" style={{ color: '#4b5563' }}>
+                            <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>–</span>
+                            <span>{h}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <ul className="mt-2 space-y-1">
-                {job.highlights.map((h, j) => (
-                  <li key={j} className="text-xs flex gap-2" style={{ color: '#4b5563' }}>
-                    <span className="flex-shrink-0" style={{ color: '#9ca3af' }}>–</span>
-                    <span>{h}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            )
+          })}
         </div>
 
         {/* Skills */}
@@ -147,25 +185,27 @@ export default function Resume({ data }) {
 
       <style>{`
         .resume-content, .resume-content * {
-          color-scheme: light \!important;
+          color-scheme: light !important;
         }
         .ats-link {
           color: #6b7280;
           text-decoration: none;
         }
         @media print {
-          .no-print { display: none \!important; }
-          body { background: white \!important; margin: 0; }
+          .no-print { display: none !important; }
+          body { background: white !important; margin: 0; }
           .resume-content {
-            width: 100% \!important;
-            max-width: 100% \!important;
-            padding: 20mm 18mm \!important;
-            margin: 0 \!important;
-            box-shadow: none \!important;
+            width: 100% !important;
+            max-width: 100% !important;
+            /* padding comes from @page margin below, which repeats on every page */
+            padding: 0 !important;
+            margin: 0 !important;
+            box-shadow: none !important;
           }
           @page {
             size: A4;
-            margin: 0;
+            /* 18 mm margin on all sides, applied to every printed page */
+            margin: 18mm;
           }
         }
       `}</style>

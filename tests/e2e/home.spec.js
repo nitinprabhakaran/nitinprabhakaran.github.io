@@ -34,11 +34,15 @@ test.describe('Home page', () => {
     await expect(page.locator('#about')).toBeVisible()
   })
 
-  test('experience section renders at least one job entry', async ({ page }) => {
+  test('experience section renders at least one company entry', async ({ page }) => {
     const section = page.locator('#experience')
     await expect(section).toBeVisible()
-    // At least one company name should be visible
+    // Company names visible in the timeline
     await expect(section.getByText('Envestnet')).toBeVisible()
+    await expect(section.getByText('Ericsson')).toBeVisible()
+    // Ericsson multi-position: both roles should be visible
+    await expect(section.getByText('DevOps Engineer')).toBeVisible()
+    await expect(section.getByText('Implementation Engineer')).toBeVisible()
   })
 
   test('skills section is present and shows skill categories', async ({ page }) => {
