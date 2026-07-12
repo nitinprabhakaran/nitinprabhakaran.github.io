@@ -92,8 +92,8 @@ certifications:
     url: "https://www.credly.com/badges/faf2fd92-9ed0-408b-b462-c9df29efb626"
 
 projects:
-  - name: "DevOps AI Agents Platform"
-    description: "Building an internal agent ecosystem to accelerate DevOps decisions across CI/CD, infrastructure analysis, and support."
+  - name: "DevOps AI Agents Tools"
+    description: "Building an internal agent ecosystem to accelerate DevOps decisions across CI/CD, infrastructure analysis, code reviews, code scanning and support."
     tags: ["AWS Bedrock", "Agno", "AWS Strands Agents", "Python"]
   - name: "Internal DevOps Platform (IDP)"
     description: "A unified platform backbone removing repeated infrastructure work across microservices teams through standards and self-service."
