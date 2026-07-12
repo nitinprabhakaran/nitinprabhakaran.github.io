@@ -18,22 +18,28 @@ experience:
         start: "2025-02"
         end: "present"
         highlights:
-          - "Driving AI adoption within the DevOps function; building internal agents to streamline CI/CD, infrastructure analysis, and self-service support workflows."
-          - "Introduced a front-end DevOps support agent integrated with a knowledge-base agent to enrich tickets, surface known solutions, and accelerate issue resolution."
-          - "Mentoring junior engineers on cross-team solution design, architecture, and end-to-end automation delivery."
-          - "Standardizing platform workflows through shared Helm charts, reusable Terraform modules, and DRY-based practices across microservices."
-          - "Applying scaling and cost-optimization strategies to reduce non-production cloud spend."
+          - "Architected a multi-agent platform on AWS Bedrock where autonomous agents triage CI/CD failures, detect infrastructure drift, and surface runbooks — shifting the team from reactive firefighting to self-service resolution."
+          - "Shipped a two-tier support agent — a React front-end feeding tickets into an LLM knowledge-base retriever — so every incoming incident arrives pre-enriched with historically-matched context before an engineer reads it."
+          - "Technical lead across cross-functional squads; introduced structured architecture reviews and pairing cadences that reduced friction between platform and product engineering."
+          - "Built a Helm chart and Terraform module library adopted org-wide, with cost-tagging and security baselines enforced at module level rather than bolted on after the fact."
+          - "Designed scheduled scaling and right-sizing strategies for non-production environments that eliminated cloud waste without introducing configuration drift between dev and production."
 
   - company: "Ameriprise Financial"
     positions:
       - role: "Lead Engineer – Cloud and DevOps"
-        start: "2021-10"
+        start: "2023-02"
         end: "2025-02"
         highlights:
-          - "Developed Ansible-based automation to reduce repetitive operations and improve efficiency for the CIS team."
-          - "Partnered with cloud and infrastructure teams to automate cross-functional processes, reporting, and routine maintenance cycles."
-          - "Built automation, playbooks, and scripts to support on-premises-to-AWS migration initiatives."
-          - "Created automation frameworks for disaster recovery setup and operational readiness."
+          - "Automated the CIS team's highest-frequency operational tasks with Ansible — turning error-prone multi-step procedures into single-command operations and removing an entire class of change-management risk."
+          - "Built a cross-team automation layer that collapsed reporting, maintenance, and operational cycles across cloud and infra teams into coordinated, triggered pipelines instead of manual handoffs."
+          - "Engineered Python and Ansible migration tooling that handled the repetitive, error-prone parts of per-service on-premises-to-AWS migration — freeing engineers to focus on workload-specific decisions rather than boilerplate."
+          - "Designed an automated DR validation framework that exercises failover scenarios on demand, replacing ad-hoc manual testing with repeatable, auditable evidence of recovery readiness."
+          - "Identified the highest-friction operational workflows and built the first Ansible automations that became the foundation for the org-wide framework later scaled during the Lead Engineer phase."
+          - "Embedded with AWS architects during cloud migration planning, contributing infrastructure design decisions that shaped migration sequencing and reduced rework in later phases."
+      - role: "Senior Engineer – Cloud and DevOps"
+        start: "2021-10"
+        end: "2023-02"
+        highlights: []
 
   - company: "Rakuten"
     positions:
@@ -41,33 +47,33 @@ experience:
         start: "2021-01"
         end: "2021-10"
         highlights:
-          - "Delivered CI/CD operations and SaaS application deployments for client engagements."
-          - "Supported cloud migration initiatives from public cloud to Rakuten OneCloud."
+          - "Owned end-to-end CI/CD delivery for multiple client SaaS products simultaneously, each with different deployment cadences, environments, and stakeholder expectations."
+          - "Led infrastructure parity assessment and cutover execution for services migrating from public cloud to Rakuten OneCloud — mapping capability gaps and designing workarounds where feature parity didn't exist."
 
   - company: "Ericsson"
     positions:
-      - role: "DevOps Engineer"
-        start: "2019-06"  # update to exact transition date if known
+      - role: "Systems Engineer"
+        start: "2019-02"
         end: "2021-01"
         highlights:
-          - "Drove CI/CD for charging system applications to Azure Cloud."
-          - "Managed deployments and release pipelines for network charging systems."
+          - "Built CI/CD pipelines from scratch on Azure for a billing-critical telecom charging system — where a botched release directly impacts subscriber revenue, making release confidence non-negotiable."
+          - "Shifted the team's release model from manual, high-risk deployments to fully automated pipelines, compressing release cycles and turning what had been a weekend-event into a routine weekday operation."
+          - "Commissioned telecom charging system deployments across multiple countries — each requiring vendor-specific integration, custom configuration, and formal operator acceptance testing before going live."
+          - "Maintained high-availability charging infrastructure where downtime directly translates to unbilled calls, developing a discipline for proactive monitoring and fast incident response."
       - role: "Implementation Engineer"
         start: "2017-03"
-        end: "2019-06"  # update to exact transition date if known
-        highlights:
-          - "Performed maintenance and operational support for charging system servers."
-          - "Handled implementation and commissioning tasks for telecom charging systems."
+        end: "2019-02"
+        highlights: []
 
 skills:
   cloud: ["AWS", "Azure"]
   iac: ["Terraform", "CloudFormation", "Azure ARM Templates", "OpenTofu"]
   cicd: ["Jenkins", "GitLab CI", "ArgoCD", "Argo Workflows"]
-  containers: ["Docker", "Kubernetes", "Helm", "Kustomize"]
+  containers: ["Docker", "Kubernetes", "Helm", "Kustomize", "KEDA"]
   observability: ["New Relic", "Sumo Logic"]
   scripting: ["Python", "Bash", "Groovy"]
   coding_harness: ["GitHub Copilot", "Claude Code"]
-  ai_automation: ["AWS Bedrock Agents", "Agno", "LangChain", "LangGraph"]
+  ai_automation: ["AWS Bedrock Agents", "AWS Strands Agents", "Agno", "LangChain", "LangGraph"]
 
 certifications:
   - name: "RedHat Certified System Administrator (RHEL8)"
@@ -79,7 +85,7 @@ certifications:
   - name: "Microsoft Certified Azure Administrator Associate (AZ-104)"
     file: "files/Microsoft_Certified_Professional_Certificate_0.pdf"
   - name: "Certified Gremlin Chaos Engineering Practitioner"
-    file: "files/Gremlin Certified Chaos Engineer.pdf"
+    file: "files/Gremlin_Certified_Chaos_Engineer.pdf"
   - name: "ITIL v4 Foundation in IT Service Management"
     file: "files/ITIL_v4_Foundation_in_IT_Service_Management.pdf"
   - name: "Istio Essentials (Solo.io)"
@@ -88,10 +94,10 @@ certifications:
 projects:
   - name: "DevOps AI Agents Platform"
     description: "Building an internal agent ecosystem to accelerate DevOps decisions across CI/CD, infrastructure analysis, and support."
-    tags: ["AI Agents", "AWS Bedrock", "LangChain", "LangGraph", "Agno", "Python"]
-  - name: "Internal Developer Platform (IDP)"
+    tags: ["AWS Bedrock", "Agno", "AWS Strands Agents", "Python"]
+  - name: "Internal DevOps Platform (IDP)"
     description: "A unified platform backbone removing repeated infrastructure work across microservices teams through standards and self-service."
-    tags: ["IDP", "Helm", "Terraform", "Kustomize", "ArgoCD", "GitOps"]
+    tags: ["Python", "Helm", "Terraform", "Kustomize", "ArgoCD", "GitOps"]
   - name: "Cloud Migration & DR Automation"
     description: "Automated the heavy lifting behind large-scale infrastructure migration and disaster recovery readiness on AWS."
     tags: ["AWS", "Ansible", "Python", "Terraform", "Migration"]

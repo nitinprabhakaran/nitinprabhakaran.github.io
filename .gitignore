@@ -43,3 +43,7 @@ dist-ssr/
 # Generated public assets (populated at build time by copy-assets.js)
 public/files/
 public/images/
+
+# Generated data file (populated at build time by yaml-to-json.js)
+# Edit resume.yaml instead — never edit this file directly
+src/data/resume.json
