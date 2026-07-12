@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nitin Prabhakaran | Senior Lead DevOps Engineer</title>
+    <script>
+      // SPA routing for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages (MIT)
+      //
+      // GitHub Pages serves this file for any path that has no matching file.
+      // This script converts the path into a query string and redirects to
+      // the root index.html, which then restores the real URL via
+      // history.replaceState before React mounts.
+      //
+      // e.g. /resume  →  /?/resume
+      //      /resume?foo=bar  →  /?/resume&foo=bar
+      var pathSegmentsToKeep = 0; // 0 = user/org pages site (no repo subpath)
+
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

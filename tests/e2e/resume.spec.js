@@ -18,16 +18,19 @@ test.describe('Resume page', () => {
   })
 
   test('download PDF button triggers window.print', async ({ page }) => {
-    // Intercept window.print so the dialog does not block the test
-    let printCalled = false
-    await page.exposeFunction('__onPrintCalled', () => { printCalled = true })
+    // Override window.print before the page script runs via addInitScript,
+    // then reload so the override is active from the start.
     await page.addInitScript(() => {
-      window.print = () => window.__onPrintCalled()
+      window.__printCalled = false
+      window.print = () => { window.__printCalled = true }
     })
-
     await page.reload()
+
     await page.getByTestId('download-pdf-btn').click()
-    expect(printCalled).toBe(true)
+
+    // Poll the browser-side flag – exposeFunction is async across the boundary
+    // so we use expect.poll which retries until true or timeout.
+    await expect.poll(() => page.evaluate(() => window.__printCalled)).toBe(true)
   })
 
   test('resume shows Professional Summary section', async ({ page }) => {
